@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louagini — Louage Tunisie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c81a24;
+    --red-dark: #8f0f1a;
+    --red-light: #fdf0f0;
+    --red-mid: #f2c7cc;
+    --cream: #faf7f4;
+    --ink: #1a0a0c;
+    --ink-mid: #4a2028;
+    --muted: #8a6068;
+    --gold: #c49a1a;
+    --gold-light: #fdf5dd;
+    --white: #ffffff;
+    --border: rgba(200, 26, 36, 0.12);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.14);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 36px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── TOP HEADER ─── */
+  .site-header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(200, 26, 36, 0.97);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px;
+    height: 60px;
+    box-shadow: 0 2px 20px rgba(200,26,36,0.3);
+  }
+  .header-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: white;
+    letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .header-logo .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: #ffd966; display: inline-block; }
+  .header-tagline {
+    font-size: 0.78rem; font-weight: 300; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.7); text-transform: uppercase;
+  }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .header-badge {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    color: white; font-size: 0.78rem; font-weight: 500;
+    padding: 5px 12px; border-radius: 999px; letter-spacing: 0.05em;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 60%, #e84455 100%);
+    padding: 64px 32px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: 'LOUAGINI';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(5rem, 14vw, 11rem); font-weight: 400;
+    color: rgba(255,255,255,0.04); letter-spacing: 0.3em;
+    white-space: nowrap; pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.6); text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(255,255,255,0.4); }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: white; line-height: 1.15; margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .hero h1 em { color: #ffd966; font-style: normal; }
+  .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 480px; }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 32px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat strong { display: block; font-size: 1.8rem; font-weight: 600; color: #ffd966; line-height: 1; }
+  .hero-stat span { font-size: 0.78rem; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; margin-top: 4px; display: block; }
+  
+   .hero-car {
+    width: 280px; height: 120px; position: relative; flex-shrink: 0;
+    overflow: visible;
+  }
+  .hero-car svg { overflow: visible; }
+  @keyframes carSlide {
+    0%   { transform: translateX(-320px); opacity: 0; }
+    6%   { opacity: 1; }
+    44%  { transform: translateX(160px); opacity: 1; }
+    50%  { transform: translateX(180px); opacity: 0; }
+    51%  { transform: translateX(-320px); opacity: 0; }
+    100% { transform: translateX(-320px); opacity: 0; }
+  }
+  @keyframes flagWave {
+    0%,100% { d: path("M0,0 L32,0 L32,20 L0,20 Z"); }
+    33%     { d: path("M0,0 L32,-2 L30,10 L0,20 Z"); }
+    66%     { d: path("M0,0 L32,2 L30,10 L0,20 Z"); }
+  }
+  @keyframes wheelSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes driverBob {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-3px); }
+  }
+  @keyframes armWave {
+    0%,100% { transform: rotate(0deg); transform-origin: 80px 35px; }
+    30%      { transform: rotate(-25deg); transform-origin: 80px 35px; }
+    60%      { transform: rotate(10deg); transform-origin: 80px 35px; }
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main-wrap {
+    max-width: 1200px; margin: 0 auto;
+    padding: 32px 24px 60px;
+    display: grid; grid-template-columns: 1fr 380px; gap: 24px;
+    align-items: start;
+  }
+
+  /* ─── CARD BASE ─── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem; font-weight: 400; color: var(--red-dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .icon { font-size: 1rem; }
+  .card-body { padding: 18px 22px; }
+
+  /* ─── SEARCH PANEL ─── */
+  .search-card { margin-bottom: 20px; }
+
+  .mode-strip {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px; margin-bottom: 14px;
+  }
+  .mode-btn {
+    padding: 10px 16px; border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--red-light); color: var(--red);
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 6px;
+  }
+  .mode-btn.active {
+    background: var(--red); color: white; border-color: var(--red);
+    box-shadow: 0 4px 16px rgba(200,26,36,0.25);
+  }
+  .mode-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; flex-shrink: 0; }
+
+  .sel-row {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px;
+    align-items: center; margin-bottom: 14px;
+  }
+  .sel-box {
+    background: var(--red-light); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 14px; min-height: 52px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .sel-box.active-sel { border-color: var(--red); background: #fff8f8; box-shadow: 0 0 0 3px rgba(200,26,36,0.1); }
+  .sel-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .sel-value { font-size: 0.92rem; font-weight: 600; color: var(--red-dark); }
+  .sel-value.empty { color: var(--muted); font-weight: 400; font-style: italic; }
+  .swap-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid var(--border); background: white;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.18s; color: var(--red); flex-shrink: 0;
+  }
+  .swap-btn:hover { background: var(--red); color: white; border-color: var(--red); transform: rotate(180deg); }
+  .swap-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+  .booking-row {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+  }
+  .booking-field { flex: 1; min-width: 120px; }
+  .booking-field label { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-bottom: 5px; }
+  .booking-field input, .booking-field select {
+    width: 100%; padding: 9px 12px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); background: white;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink);
+    transition: border-color 0.15s;
+  }
+  .booking-field input:focus, .booking-field select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,26,36,0.1); }
+
+  .search-input-wrap { position: relative; margin-bottom: 12px; }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+  .search-icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+  #city-search {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--ink);
+    background: white; transition: all 0.15s;
+  }
+  #city-search:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,26,36,0.1); }
+  /* ─── Flag Icon ─── */
+  .flag-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 4px;
+  border-radius: 2px; /* optionnel */
+}
+
+  /* ─── CITY GRID ─── */
+  .city-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .city-btn {
+    position: relative; border-radius: var(--radius-sm); overflow: hidden;
+    min-height: 72px; border: none; cursor: pointer;
+    display: flex; align-items: flex-end; padding: 8px;
+    background: var(--red-light); transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .city-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent); }
+  .city-btn span { position: relative; z-index: 1; font-size: 0.8rem; font-weight: 600; color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .city-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .city-btn.sel-dest::before { content: ''; position: absolute; inset: 0; border: 3px solid #ffd966; z-index: 2; border-radius: var(--radius-sm); }
+  .city-btn.sel-dep::before { content: ''; position: absolute; inset: 0; border: 3px solid #7edb83; z-index: 2; border-radius: var(--radius-sm); }
+  .city-btn .city-badge {
+    position: absolute; top: 5px; right: 5px; z-index: 3;
+    width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; font-weight: 700; color: white;
+  }
+  .city-btn.sel-dest .city-badge { background: #c49a1a; }
+  .city-btn.sel-dep .city-badge { background: #27a83a; }
+
+  /* ─── SVG MAP ─── */
+  .map-card { margin-bottom: 20px; }
+  .map-wrap { position: relative; }
+  #tunisia-map {
+    width: 100%; height: auto; display: block;
+    cursor: crosshair;
+  }
+  #tunisia-map .gov-path {
+    fill: #fce8e9; stroke: white; stroke-width: 1.2;
+    transition: fill 0.15s; cursor: pointer;
+  }
+  #tunisia-map .gov-path:hover { fill: #f4b3b8; }
+  #tunisia-map .gov-path.sel-dest { fill: #ffd966; stroke: #c49a1a; stroke-width: 1.5; }
+  #tunisia-map .gov-path.sel-dep { fill: #7edb83; stroke: #27a83a; stroke-width: 1.5; }
+  #tunisia-map .gov-path.sel-both-dest { fill: #ffd966; }
+  .map-legend {
+    display: flex; gap: 14px; margin-top: 10px; flex-wrap: wrap;
+    font-size: 0.78rem; color: var(--muted);
+  }
+  .map-legend-item { display: flex; align-items: center; gap: 5px; }
+  .map-legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+  .map-tooltip {
+    position: absolute; pointer-events: none;
+    background: var(--red-dark); color: white;
+    font-size: 0.78rem; font-weight: 600; padding: 5px 10px;
+    border-radius: var(--radius-sm); white-space: nowrap;
+    opacity: 0; transition: opacity 0.12s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    z-index: 10;
+  }
+
+  /* ─── RESULT CARD ─── */
+  .result-card { margin-bottom: 20px; display: none; }
+  .result-header {
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .result-badge.direct { background: #e7f7e8; color: #1a6b24; }
+  .result-badge.indirect { background: #fff3e0; color: #8a4e00; }
+  .result-badge.none { background: #fce8e8; color: #8a0012; }
+  .result-title {
+    font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--red-dark);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .result-route { padding: 18px 22px; }
+  .route-step {
+    display: flex; align-items: stretch; gap: 12px; margin-bottom: 4px;
+  }
+  .route-step-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .route-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+  .route-dot.green { background: #27a83a; }
+  .route-dot.gold { background: var(--gold); }
+  .route-connector { width: 2px; flex: 1; background: var(--red-mid); min-height: 24px; margin: 2px auto; }
+  .route-step-info { padding-bottom: 16px; padding-top: 0; }
+  .route-city { font-size: 1rem; font-weight: 600; color: var(--ink); }
+  .route-meta { font-size: 0.82rem; color: var(--muted); margin-top: 3px; }
+
+  .result-infos {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; padding: 0 22px 18px;
+  }
+  .info-box {
+    background: var(--red-light); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 14px; text-align: center;
+  }
+  .info-box .val { font-size: 1.3rem; font-weight: 700; color: var(--red-dark); }
+  .info-box .lbl { font-size: 0.7rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+  .reset-btn {
+    margin: 0 22px 18px; display: block; width: calc(100% - 44px);
+    padding: 12px; border-radius: var(--radius-sm); border: none;
+    background: var(--red); color: white; font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem; font-weight: 600; cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .reset-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  /* ─── INFO PANEL (right) ─── */
+  .city-info-card { margin-bottom: 20px; }
+  .city-info-photo {
+    width: 100%; height: 140px; object-fit: cover;
+    border-radius: 0; display: block;
+    background: var(--red-light);
+  }
+  .city-info-body { padding: 16px 20px; }
+  .city-info-name {
+    font-family: 'DM Serif Display', serif; font-size: 1.5rem;
+    color: var(--red-dark); margin-bottom: 6px;
+  }
+  .city-info-desc { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; margin-bottom: 14px; }
+  .city-info-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .city-tag {
+    font-size: 0.72rem; font-weight: 500; padding: 4px 10px; border-radius: 999px;
+    background: var(--red-light); color: var(--red); border: 1px solid var(--border);
+  }
+
+  /* ─── TARIF TABLE ─── */
+  .tarif-card { }
+  .tarif-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .tarif-table thead tr { background: var(--red-light); }
+  .tarif-table th { padding: 9px 12px; text-align: left; font-weight: 600; color: var(--red-dark); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .tarif-table td { padding: 9px 12px; border-bottom: 1px solid rgba(200,26,36,0.06); color: var(--ink-mid); vertical-align: top; }
+  .tarif-table tr:hover td { background: var(--red-light); }
+  .tarif-price { font-weight: 700; color: var(--red-dark); white-space: nowrap; }
+  .tarif-search { width: 100%; padding: 9px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; margin-bottom: 12px; }
+  .tarif-search:focus { outline: none; border-color: var(--red); }
+  .tarif-scroll { max-height: 320px; overflow-y: auto; }
+
+  /* ─── FOOTER ─── */
+  .site-footer {
+    background: var(--red-dark); color: rgba(255,255,255,0.8);
+    padding: 40px 32px; margin-top: 40px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: white; margin-bottom: 8px; }
+  .footer-desc { font-size: 0.85rem; line-height: 1.7; }
+  .footer-section h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .footer-section p { font-size: 0.85rem; margin-bottom: 6px; }
+  .footer-section a { color: #ffd9db; text-decoration: none; }
+  .footer-section a:hover { color: #ffd966; }
+  .footer-bottom { max-width: 1200px; margin: 24px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.78rem; color: rgba(255,255,255,0.4); display: flex; justify-content: space-between; }
+
+  /* ─── NOTICE ─── */
+  .notice {
+    padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 14px;
+    font-size: 0.84rem; line-height: 1.6;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .notice svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; flex-shrink: 0; margin-top: 1px; }
+  .notice.info { background: var(--gold-light); color: #6b4800; border: 1px solid #f0d88a; }
+  .notice.tip { background: #e8f7e8; color: #1a5c24; border: 1px solid #a8dfb0; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  .anim-in { animation: fadeInUp 0.35s ease forwards; }
+
+  /* scrollbar */
+  .tarif-scroll::-webkit-scrollbar { width: 4px; }
+  .tarif-scroll::-webkit-scrollbar-track { background: var(--red-light); }
+  .tarif-scroll::-webkit-scrollbar-thumb { background: var(--red-mid); border-radius: 2px; }
+
+  /* ─── NO RESULTS ─── */
+  .no-results { grid-column: 1/-1; padding: 20px; text-align: center; color: var(--muted); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+
+  <div class="header-logo">
+    <span class="logo-dot"></span>
+    Louagini
+  </div>
+
+  <div class="header-tagline">
+    Le louage tunisien simplifié
+  </div>
+
+  <div class="header-right">
+    <span class="header-badge">
+      <img src="Flag_of_Tunisia.svg" alt="TN" class="flag-icon">
+      +24 Gouvernorats
+    </span>
+  </div>
+
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Voyagez malin en Tunisie</p>
+      <h1>Trouvez votre<br><em>louage</em> en un clic</h1>
+      <p class="hero-sub">Tarifs vérifiés, correspondances intelligentes et toutes les stations de départ pour voyager partout en Tunisie.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>60+</strong><span>Trajets vérifiés</span></div>
+        <div class="hero-stat"><strong>24+</strong><span>Gouvernorats</span></div>
+        <div class="hero-stat"><strong>2 étapes</strong><span>Pour trouver votre trajet</span></div>
+      </div>
+    </div>
+     <!-- Voiture animée avec chauffeur + drapeau tunisien -->
+    <div class="hero-car" aria-hidden="true">
+      <svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg" style="animation: carSlide 9s linear infinite; overflow:visible;">
+ 
+ 
+        <!-- === CARROSSERIE === -->
+        <!-- Ombre -->
+        <ellipse cx="145" cy="103" rx="115" ry="7" fill="rgba(0,0,0,0.18)"/>
+        <!-- Corps principal -->
+        <rect x="20" y="60" width="225" height="36" rx="12" fill="#d91f2a"/>
+        <!-- Toit -->
+        <path d="M55 60 Q62 38 88 33 L200 33 Q228 33 232 60 Z" fill="#c41822"/>
+        <!-- Reflet toit -->
+        <path d="M75 58 Q80 42 100 38 L185 38 Q205 38 210 58 Z" fill="rgba(255,255,255,0.07)"/>
+ 
+        <!-- === FENÊTRES === -->
+        <!-- Fenêtre avant -->
+        <rect x="62" y="37" width="52" height="21" rx="5" fill="rgba(180,225,255,0.88)"/>
+        <line x1="88" y1="37" x2="88" y2="58" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        <!-- Fenêtre milieu -->
+        <rect x="120" y="37" width="52" height="21" rx="5" fill="rgba(180,225,255,0.88)"/>
+        <line x1="146" y1="37" x2="146" y2="58" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        <!-- Fenêtre arrière -->
+        <rect x="178" y="37" width="42" height="21" rx="5" fill="rgba(180,225,255,0.78)"/>
+        <!-- Reflets fenêtres -->
+        <rect x="65" y="39" width="18" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+        <rect x="123" y="39" width="18" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+ 
+        <!-- === DÉTAILS CARROSSERIE === -->
+        <!-- Bande décorative -->
+        <rect x="20" y="78" width="225" height="3" rx="1" fill="rgba(255,255,255,0.12)"/>
+        <!-- Calandre / pointe avant -->
+        <rect x="242" y="68" width="12" height="14" rx="6" fill="#cc1820"/>
+        <!-- Feux avant (jaune) -->
+        <ellipse cx="252" cy="72" rx="8" ry="5" fill="#ffd966" opacity="0.95"/>
+        <ellipse cx="252" cy="72" rx="5" ry="3" fill="#ffe599"/>
+        <!-- Feu arrière (rouge foncé) -->
+        <rect x="20" y="68" width="8" height="12" rx="4" fill="#ff6060"/>
+        <rect x="21" y="69" width="4" height="8" rx="2" fill="#ffaaaa" opacity="0.7"/>
+        <!-- Grille avant -->
+        <rect x="244" y="80" width="10" height="8" rx="2" fill="#aa1218"/>
+        <line x1="246" y1="80" x2="246" y2="88" stroke="#c41822" stroke-width="1"/>
+        <line x1="249" y1="80" x2="249" y2="88" stroke="#c41822" stroke-width="1"/>
+        <line x1="252" y1="80" x2="252" y2="88" stroke="#c41822" stroke-width="1"/>
+ 
+        <!-- === ROUES === -->
+        <!-- Roue avant -->
+        <g style="transform-origin:210px 95px; animation:wheelSpin 0.7s linear infinite;">
+          <circle cx="210" cy="95" r="17" fill="#1a0a0c"/>
+          <circle cx="210" cy="95" r="11" fill="#2e1515"/>
+          <line x1="210" y1="84" x2="210" y2="106" stroke="#555" stroke-width="2.5"/>
+          <line x1="199" y1="95" x2="221" y2="95" stroke="#555" stroke-width="2.5"/>
+          <line x1="202" y1="87" x2="218" y2="103" stroke="#555" stroke-width="2"/>
+          <line x1="218" y1="87" x2="202" y2="103" stroke="#555" stroke-width="2"/>
+          <circle cx="210" cy="95" r="4" fill="#888"/>
+        </g>
+        <!-- Roue arrière -->
+        <g style="transform-origin:68px 95px; animation:wheelSpin 0.7s linear infinite;">
+          <circle cx="68" cy="95" r="17" fill="#1a0a0c"/>
+          <circle cx="68" cy="95" r="11" fill="#2e1515"/>
+          <line x1="68" y1="84" x2="68" y2="106" stroke="#555" stroke-width="2.5"/>
+          <line x1="57" y1="95" x2="79" y2="95" stroke="#555" stroke-width="2.5"/>
+          <line x1="60" y1="87" x2="76" y2="103" stroke="#555" stroke-width="2"/>
+          <line x1="76" y1="87" x2="60" y2="103" stroke="#555" stroke-width="2"/>
+          <circle cx="68" cy="95" r="4" fill="#888"/>
+        </g>
+ 
+        <!-- === CHAUFFEUR === -->
+        <g style="animation: driverBob 1.4s ease-in-out infinite;">
+          <!-- Buste / torse -->
+          <rect x="72" y="42" width="18" height="16" rx="4" fill="#1a6bc4"/>
+          <!-- Cou -->
+          <rect x="78" y="36" width="6" height="7" rx="2" fill="#d4956a"/>
+          <!-- Tête -->
+          <circle cx="81" cy="32" r="10" fill="#d4956a"/>
+          <!-- Cheveux -->
+          <path d="M71 29 Q72 18 81 17 Q90 18 91 29 Q88 24 81 23 Q74 24 71 29 Z" fill="#2c1a0e"/>
+          <!-- Oreilles -->
+          <circle cx="71" cy="32" r="3" fill="#c4855a"/>
+          <circle cx="91" cy="32" r="3" fill="#c4855a"/>
+          <!-- Yeux -->
+          <circle cx="77" cy="31" r="2" fill="#1a0a0c"/>
+          <circle cx="85" cy="31" r="2" fill="#1a0a0c"/>
+          <circle cx="77.7" cy="30.3" r="0.7" fill="white"/>
+          <circle cx="85.7" cy="30.3" r="0.7" fill="white"/>
+          <!-- Moustache -->
+          <path d="M77 35 Q81 37 85 35" stroke="#2c1a0e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Sourire -->
+          <path d="M76 36 Q81 39.5 86 36" stroke="#2c1a0e" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <!-- Lunettes de soleil -->
+          <rect x="73" y="28.5" width="8" height="5" rx="2.5" fill="rgba(0,0,0,0.65)"/>
+          <rect x="82" y="28.5" width="8" height="5" rx="2.5" fill="rgba(0,0,0,0.65)"/>
+          <line x1="81" y1="31" x2="82" y2="31" stroke="rgba(0,0,0,0.65)" stroke-width="1.2"/>
+          <!-- Bras tenant le drapeau -->
+          <g style="animation: armWave 2s ease-in-out infinite;">
+            <line x1="81" y1="42" x2="95" y2="25" stroke="#d4956a" stroke-width="4" stroke-linecap="round"/>
+            <!-- Manche du drapeau -->
+            <line x1="95" y1="25" x2="95" y2="5" stroke="#8B6914" stroke-width="2"/>
+            <!-- Drapeau tunisien (SVG inline) -->
+            <image x="99" y="3" width="40" height="28" xlink:href="Flag_of_Tunisia.svg"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-wrap">
+
+  <!-- ══ LEFT COLUMN ══ -->
+  <div class="left-col">
+
+    <!-- ─── SEARCH CARD ─── -->
+    <div class="card search-card" id="search-panel">
+      <div class="card-header">
+        <span class="card-title">
+          <span class="icon">🔍</span> Rechercher un trajet
+        </span>
+        <span style="font-size:0.78rem;color:var(--muted);" id="step-indicator">Étape 1 : choisissez la destination</span>
+      </div>
+      <div class="card-body">
+        <!-- Mode buttons -->
+        <div class="mode-strip">
+          <button class="mode-btn active" id="btn-dest" onclick="setMode('destination')">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5" stroke-width="2"/></svg>
+            Destination
+          </button>
+          <button class="mode-btn" id="btn-dep" onclick="setMode('depart')">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            Lieu de départ
+          </button>
+        </div>
+
+        <!-- Selection display -->
+        <div class="sel-row">
+          <div class="sel-box" id="sel-dest-box">
+            <span class="sel-label">Destination</span>
+            <span class="sel-value empty" id="sel-dest">Choisir…</span>
+          </div>
+          <button class="swap-btn" onclick="swapSelections()" title="Inverser">
+            <svg viewBox="0 0 24 24"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+          </button>
+          <div class="sel-box" id="sel-dep-box">
+            <span class="sel-label">Départ</span>
+            <span class="sel-value empty" id="sel-dep">Choisir…</span>
+          </div>
+        </div>
+
+        <!-- Booking params -->
+        <div class="booking-row">
+          <div class="booking-field">
+            <label for="travel-date">Date du voyage</label>
+            <input type="date" id="travel-date">
+          </div>
+          <div class="booking-field">
+            <label for="passengers">Passagers</label>
+            <select id="passengers">
+              <option value="1">1 passager</option>
+              <option value="2">2 passagers</option>
+              <option value="3">3 passagers</option>
+              <option value="4">4 passagers</option>
+              <option value="5">5 passagers</option>
+              <option value="6">6 passagers</option>
+              <option value="7">7 passagers</option>
+              <option value="8">8 passagers</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Search box -->
+        <div class="search-input-wrap">
+          <span class="search-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </span>
+          <input type="search" id="city-search" placeholder="Filtrer les villes…">
+        </div>
+
+        <!-- City grid -->
+        <div class="city-grid" id="city-results"></div>
+      </div>
+    </div>
+
+    <!-- ─── RESULT CARD ─── -->
+    <div class="card result-card" id="result-panel">
+      <div class="result-header">
+        <div class="result-badge" id="res-badge"></div>
+        <div class="result-title" id="res-title"></div>
+      </div>
+      <div class="result-route" id="res-route"></div>
+      <div class="result-infos" id="res-infos"></div>
+      <div style="padding:0 22px 10px;">
+        <div class="notice info" id="res-notice"></div>
+      </div>
+      <button class="reset-btn" onclick="reinitialiser()">← Nouvelle recherche</button>
+    </div>
+
+    <!-- ─── MAP CARD ─── -->
+    <div class="card map-card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon">🗺️</span> Carte interactive de Tunisie</span>
+        <span style="font-size:0.78rem;color:var(--muted);">Cliquez sur un gouvernorat</span>
+      </div>
+      <div class="card-body" style="padding:14px 16px;">
+        <div class="map-wrap">
+          <div class="map-tooltip" id="map-tooltip"></div>
+          <svg id="tunisia-map" viewBox="0 0 340 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carte des gouvernorats de Tunisie">
+            <title>Carte interactive des gouvernorats de Tunisie</title>
+            <!-- Approximate paths for all 24 governorates -->
+            <path class="gov-path" data-gov="Bizerte" d="M100,10 L170,10 L190,30 L185,50 L175,60 L155,65 L130,65 L105,55 L90,40 L88,25 Z"/>
+            <path class="gov-path" data-gov="Ariana" d="M175,60 L190,55 L205,60 L210,75 L200,85 L185,88 L172,80 Z"/>
+            <path class="gov-path" data-gov="Tunis" d="M185,88 L210,80 L220,88 L218,105 L205,112 L190,108 L182,100 Z"/>
+            <path class="gov-path" data-gov="La Manouba" d="M155,65 L175,60 L172,80 L165,92 L148,90 L138,80 L140,68 Z"/>
+            <path class="gov-path" data-gov="Ben Arous" d="M190,108 L218,105 L222,122 L215,135 L200,138 L185,130 L182,118 Z"/>
+            <path class="gov-path" data-gov="Nabeul" d="M200,85 L225,80 L245,95 L255,115 L250,140 L240,160 L228,168 L215,158 L208,140 L215,125 L215,110 L205,100 Z"/>
+            <path class="gov-path" data-gov="Zaghouan" d="M182,118 L215,135 L218,155 L210,172 L195,175 L180,165 L172,148 L175,135 Z"/>
+            <path class="gov-path" data-gov="Béja" d="M90,40 L105,55 L130,65 L138,80 L130,100 L115,115 L95,118 L72,105 L65,82 L70,58 Z"/>
+            <path class="gov-path" data-gov="Jendouba" d="M70,58 L65,82 L72,105 L60,125 L42,130 L22,118 L15,95 L25,68 L48,55 Z"/>
+            <path class="gov-path" data-gov="Le Kef" d="M72,105 L95,118 L105,140 L100,165 L82,178 L60,175 L42,158 L42,130 L60,125 Z"/>
+            <path class="gov-path" data-gov="Siliana" d="M105,140 L130,135 L148,145 L155,168 L145,188 L125,195 L105,188 L90,172 L82,155 L82,178 L100,165 Z"/>
+            <path class="gov-path" data-gov="Monastir" d="M228,168 L245,162 L258,170 L262,185 L255,200 L240,205 L226,198 L220,184 Z"/>
+            <path class="gov-path" data-gov="Mahdia" d="M255,200 L270,192 L285,200 L290,222 L282,240 L265,248 L250,242 L244,225 Z"/>
+            <path class="gov-path" data-gov="Sousse" d="M215,158 L240,160 L255,175 L258,198 L240,205 L226,198 L218,185 L208,175 L210,162 Z"/>
+            <path class="gov-path" data-gov="Kairouan" d="M145,188 L175,182 L195,192 L208,215 L205,245 L190,262 L168,268 L148,260 L132,242 L130,218 L138,200 Z"/>
+            <path class="gov-path" data-gov="Kasserine" d="M82,178 L105,188 L125,195 L130,218 L125,248 L108,265 L85,268 L62,252 L52,228 L55,202 L68,188 Z"/>
+            <path class="gov-path" data-gov="Sidi Bouzid" d="M130,218 L155,210 L175,218 L190,238 L192,265 L180,285 L158,292 L138,285 L122,268 L118,248 Z"/>
+            <path class="gov-path" data-gov="Sfax" d="M240,242 L268,248 L285,262 L295,285 L292,315 L278,332 L258,338 L238,328 L222,308 L218,282 L225,262 Z"/>
+            <path class="gov-path" data-gov="Gafsa" d="M55,268 L85,268 L108,278 L118,300 L115,330 L98,348 L75,352 L52,338 L40,312 L42,285 Z"/>
+            <path class="gov-path" data-gov="Tozeur" d="M22,335 L52,338 L75,352 L78,378 L65,398 L42,408 L18,400 L8,375 L10,350 Z"/>
+            <path class="gov-path" data-gov="Kébili" d="M98,348 L125,345 L148,355 L160,378 L158,408 L142,425 L118,430 L95,420 L78,400 L78,378 L90,360 Z"/>
+            <path class="gov-path" data-gov="Gabès" d="M238,328 L265,335 L285,350 L292,378 L285,400 L265,415 L245,418 L225,405 L215,382 L218,355 Z"/>
+            <path class="gov-path" data-gov="Médenine" d="M245,418 L278,415 L305,425 L318,450 L315,480 L298,498 L272,505 L248,495 L232,472 L230,445 Z"/>
+            <path class="gov-path" data-gov="Tataouine" d="M248,495 L298,498 L325,510 L335,545 L330,590 L308,625 L272,640 L240,630 L218,605 L215,565 L225,530 Z"/>
+            <!-- City labels -->
+            <text x="130" y="40" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Bizerte</text>
+            <text x="197" y="72" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Ariana</text>
+            <text x="203" y="100" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Tunis</text>
+            <text x="157" y="80" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Manouba</text>
+            <text x="203" y="124" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Ben Arous</text>
+            <text x="232" y="130" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Nabeul</text>
+            <text x="195" y="150" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Zaghouan</text>
+            <text x="105" y="90" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Béja</text>
+            <text x="47" y="100" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Jendouba</text>
+            <text x="75" y="148" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Le Kef</text>
+            <text x="120" y="168" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Siliana</text>
+            <text x="260" y="188" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Monastir</text>
+            <text x="268" y="222" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Mahdia</text>
+            <text x="237" y="180" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Sousse</text>
+            <text x="170" y="205" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Kairouan</text>
+            <text x="90" y="232" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Kasserine</text>
+            <text x="157" y="258" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Sidi Bouzid</text>
+            <text x="258" y="292" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Sfax</text>
+            <text x="82" y="315" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Gafsa</text>
+            <text x="42" y="378" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Tozeur</text>
+            <text x="125" y="392" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Kébili</text>
+            <text x="252" y="378" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Gabès</text>
+            <text x="275" y="460" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Médenine</text>
+            <text x="272" y="565" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Tataouine</text>
+          </svg>
+        </div>
+        <div class="map-legend">
+          <div class="map-legend-item"><div class="map-legend-swatch" style="background:#ffd966;border:1px solid #c49a1a;"></div> Destination</div>
+          <div class="map-legend-item"><div class="map-legend-swatch" style="background:#7edb83;border:1px solid #27a83a;"></div> Départ</div>
+          <div class="map-legend-item"><div class="map-legend-swatch" style="background:#fce8e9;border:1px solid #f4b3b8;"></div> Non sélectionné</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── TARIFFS TABLE ─── -->
+    <div class="card tarif-card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon">💰</span> Tarifs vérifiés</span>
+        <span style="font-size:0.78rem;color:var(--muted);">Données communautaires</span>
+      </div>
+      <div class="card-body">
+        <input type="search" class="tarif-search" placeholder="Filtrer par ville…" id="tarif-search">
+        <div class="tarif-scroll">
+          <table class="tarif-table">
+            <thead><tr><th>Trajet</th><th>Prix</th><th>Observation</th></tr></thead>
+            <tbody id="tarif-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end left-col -->
+
+  <!-- ══ RIGHT COLUMN ══ -->
+  <div class="right-col">
+
+    <!-- City info -->
+    <div class="card city-info-card" id="city-info-card">
+      <div class="card-header">
+        <span class="card-title"><span class="icon">📍</span> Infos de la ville</span>
+      </div>
+      <div id="city-info-content" style="text-align:center;padding:30px 20px;color:var(--muted);font-size:0.88rem;">
+        Sélectionnez une ville pour voir ses infos.
+      </div>
+    </div>
+
+    <!-- Tip -->
+    <div class="notice tip" style="margin-bottom:16px;">
+      <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+      <span><strong>Bon à savoir :</strong> Le louage part quand il est plein. Arrivez tôt le matin pour éviter l'attente, surtout le vendredi et les jours de marché.</span>
+    </div>
+
+    <!-- Popular routes -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header">
+        <span class="card-title"><span class="icon">⭐</span> Trajets populaires</span>
+      </div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:8px;" id="popular-routes"></div>
+    </div>
+
+    <!-- Info tip -->
+    <div class="notice info">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Les prix affichés sont <strong>par siège</strong>. Un louage standard compte 8 places passagers. Pour réserver tout le véhicule, comptez ×8 le prix affiché.</span>
+    </div>
+
+  </div><!-- end right-col -->
+
+</div><!-- end main-wrap -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Louagini</div>
+      <p class="footer-desc">Le guide communautaire du louage tunisien. Tarifs vérifiés, trajets clairs, voyagez serein.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📧 <a href="mailto:contact@louagini.tn">contact@louagini.tn</a></p>
+      <p>📞 <a href="tel:+21695939009">+216 95 939 009</a></p>
+      
+      
+    </div>
+    <div class="footer-section">
+      <h4>Note légale</h4>
+      <p style="font-size:0.8rem;">Les tarifs sont indicatifs et basés sur des données communautaires. Ils peuvent varier légèrement selon les chauffeurs et la saison.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Louagini — Tous droits réservés</span>
+    <span>Fait avec ❤️ pour les voyageurs tunisiens</span>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════════════════
+
+const lignesLouage = {
+  "Tunis": {
+    "Sousse":    { prix: 13.5,  temps: "2h00",  station: "Moncef Bey" },
+    "Monastir":  { prix: 14.85, temps: "2h30",  station: "Moncef Bey" },
+    "Kairouan":  { prix: 14.6,  temps: "2h45",  station: "Moncef Bey" },
+    "Mahdia":    { prix: 17.65, temps: "3h15",  station: "Moncef Bey" },
+    "Sfax":      { prix: 22.75, temps: "3h30",  station: "Moncef Bey" },
+    "Bizerte":   { prix: 6.5,   temps: "1h10",  station: "Bab Saadoun" },
+    "Nabeul":    { prix: 4.7,   temps: "1h10",  station: "Bab Alioua" },
+    "Hammamet":  { prix: 6.8,   temps: "1h20",  station: "Bab Alioua" },
+    "Zaghouan":  { prix: 5.35,  temps: "1h15",  station: "Bab Alioua" },
+    "Le Kef":    { prix: 15.0,  temps: "3h00",  station: "Bab Saadoun" },
+    "Jendouba":  { prix: 14.5,  temps: "3h20",  station: "Bab Saadoun" },
+    "Tabarka":   { prix: 15.0,  temps: "4h00",  station: "Bab Saadoun" },
+    "Ras Jebel": { prix: 5.7,   temps: "1h15",  station: "Bab Saadoun" },
+    "Béja":      { prix: 9.5,   temps: "1h45",  station: "Bab Saadoun" },
+    "Kélibia":   { prix: 8.8,   temps: "1h40",  station: "Bab Alioua" },
+    "Gabès":     { prix: 32.0,  temps: "5h00",  station: "Moncef Bey" },
+    "Gafsa":     { prix: 27.0,  temps: "4h30",  station: "Moncef Bey" },
+    "Tozeur":    { prix: 34.0,  temps: "6h00",  station: "Moncef Bey" },
+  },
+  "Sousse": {
+    "Tunis":     { prix: 13.5,  temps: "2h00",  station: "Station Sousse Nord" },
+    "Monastir":  { prix: 2.4,   temps: "0h40",  station: "Station Sousse" },
+    "Kairouan":  { prix: 6.2,   temps: "1h15",  station: "Station Sousse" },
+    "Sfax":      { prix: 12.4,  temps: "1h45",  station: "Station Sousse" },
+    "Gabès":     { prix: 22.3,  temps: "3h15",  station: "Station Sousse" },
+    "Le Kef":    { prix: 19.0,  temps: "3h30",  station: "Station Sousse" },
+    "Jendouba":  { prix: 21.0,  temps: "3h50",  station: "Station Sousse" },
+    "El Jem":    { prix: 8.6,   temps: "1h15",  station: "Station Sousse" },
+    "Mahdia":    { prix: 5.9,   temps: "1h05",  station: "Station Sousse" },
+    "Nabeul":    { prix: 8.3,   temps: "1h15",  station: "Station Sousse" },
+    "Hammamet":  { prix: 7.5,   temps: "1h00",  station: "Station Sousse" },
+    "Béja":      { prix: 18.0,  temps: "3h00",  station: "Station Sousse" },
+    "Bizerte":   { prix: 19.0,  temps: "3h10",  station: "Station Sousse" },
+  },
+  "Nabeul": {
+    "Tunis":     { prix: 6.6,   temps: "1h20",  station: "Station Nabeul" },
+    "Kairouan":  { prix: 10.6,  temps: "2h05",  station: "Station Nabeul" },
+    "Monastir":  { prix: 10.9,  temps: "2h00",  station: "Station Nabeul" },
+    "Zaghouan":  { prix: 6.5,   temps: "1h20",  station: "Station Nabeul" },
+    "Sousse":    { prix: 8.3,   temps: "1h15",  station: "Station Nabeul" },
+    "Kélibia":   { prix: 5.35,  temps: "0h55",  station: "Station Nabeul" },
+    "Hammamet":  { prix: 2.0,   temps: "0h25",  station: "Station Nabeul" },
+  },
+  "Sfax": {
+    "Tunis":     { prix: 22.75, temps: "3h30",  station: "Station Sfax" },
+    "Sousse":    { prix: 12.4,  temps: "1h45",  station: "Station Sfax" },
+    "Gabès":     { prix: 9.0,   temps: "2h00",  station: "Station Sfax" },
+    "Kébili":    { prix: 21.0,  temps: "3h30",  station: "Station Sfax" },
+    "Gafsa":     { prix: 14.0,  temps: "2h30",  station: "Station Sfax" },
+    "Mahdia":    { prix: 10.0,  temps: "1h30",  station: "Station Sfax" },
+    "El Jem":    { prix: 6.0,   temps: "0h55",  station: "Station Sfax" },
+    "Monastir":  { prix: 14.0,  temps: "2h10",  station: "Station Sfax" },
+  },
+  "Gabès": {
+    "Sfax":      { prix: 9.0,   temps: "2h00",  station: "Station Gabès" },
+    "Djerba":    { prix: 14.55, temps: "2h30",  station: "Station Gabès" },
+    "Sousse":    { prix: 22.3,  temps: "3h15",  station: "Station Gabès" },
+    "Tozeur":    { prix: 17.6,  temps: "4h30",  station: "Station Gabès" },
+    "Médenine":  { prix: 8.0,   temps: "1h30",  station: "Station Gabès" },
+    "Tunis":     { prix: 32.0,  temps: "5h00",  station: "Station Gabès" },
+  },
+  "Monastir": {
+    "Sousse":    { prix: 2.4,   temps: "0h40",  station: "Station Monastir" },
+    "Kairouan":  { prix: 7.95,  temps: "1h15",  station: "Station Monastir" },
+    "Tunis":     { prix: 14.85, temps: "2h30",  station: "Station Monastir" },
+    "Sfax":      { prix: 14.0,  temps: "2h10",  station: "Station Monastir" },
+    "Mahdia":    { prix: 4.5,   temps: "0h50",  station: "Station Monastir" },
+    "Nabeul":    { prix: 10.9,  temps: "2h00",  station: "Station Monastir" },
+  },
+  "Kairouan": {
+    "Monastir":  { prix: 7.95,  temps: "1h15",  station: "Station Kairouan" },
+    "Sousse":    { prix: 6.2,   temps: "1h15",  station: "Station Kairouan" },
+    "Tunis":     { prix: 14.6,  temps: "2h45",  station: "Station Kairouan" },
+    "Sfax":      { prix: 12.0,  temps: "2h00",  station: "Station Kairouan" },
+    "Nabeul":    { prix: 10.6,  temps: "2h05",  station: "Station Kairouan" },
+    "Le Kef":    { prix: 16.0,  temps: "2h30",  station: "Station Kairouan" },
+  },
+  "Bizerte": {
+    "Tunis":     { prix: 6.5,   temps: "1h10",  station: "Station Bizerte" },
+    "Béja":      { prix: 9.25,  temps: "1h35",  station: "Station Bizerte" },
+  },
+  "Béja": {
+    "Tabarka":   { prix: 6.5,   temps: "2h10",  station: "Station Béja" },
+    "Tunis":     { prix: 9.5,   temps: "1h45",  station: "Station Béja" },
+    "Bizerte":   { prix: 9.25,  temps: "1h35",  station: "Station Béja" },
+    "Jendouba":  { prix: 4.5,   temps: "0h45",  station: "Station Béja" },
+  },
+  "Jendouba": {
+    "Tunis":     { prix: 14.5,  temps: "3h20",  station: "Station Jendouba" },
+    "Béja":      { prix: 4.5,   temps: "0h45",  station: "Station Jendouba" },
+    "Tabarka":   { prix: 5.0,   temps: "1h10",  station: "Station Jendouba" },
+    "Bousalem":  { prix: 1.8,   temps: "0h20",  station: "Station Jendouba" },
+  },
+  "Le Kef": {
+    "Kasserine": { prix: 11.5,  temps: "1h40",  station: "Station Le Kef" },
+    "Tunis":     { prix: 15.0,  temps: "3h00",  station: "Station Le Kef" },
+    "Sousse":    { prix: 19.0,  temps: "3h30",  station: "Station Le Kef" },
+    "Kairouan":  { prix: 16.0,  temps: "2h30",  station: "Station Le Kef" },
+  },
+  "Mahdia": {
+    "Sousse":    { prix: 5.9,   temps: "1h05",  station: "Station Mahdia" },
+    "El Jem":    { prix: 8.0,   temps: "1h10",  station: "Station Mahdia" },
+    "Tunis":     { prix: 17.65, temps: "3h15",  station: "Station Mahdia" },
+    "Monastir":  { prix: 4.5,   temps: "0h50",  station: "Station Mahdia" },
+    "Sfax":      { prix: 10.0,  temps: "1h30",  station: "Station Mahdia" },
+  },
+  "Gafsa": {
+    "Tunis":     { prix: 27.0,  temps: "4h30",  station: "Station Gafsa" },
+    "Sfax":      { prix: 14.0,  temps: "2h30",  station: "Station Gafsa" },
+    "Tozeur":    { prix: 8.0,   temps: "1h30",  station: "Station Gafsa" },
+    "Kébili":    { prix: 10.0,  temps: "1h45",  station: "Station Gafsa" },
+    "Kasserine": { prix: 7.0,   temps: "1h20",  station: "Station Gafsa" },
+  },
+  "Tozeur": {
+    "Gafsa":     { prix: 8.0,   temps: "1h30",  station: "Station Tozeur" },
+    "Gabès":     { prix: 17.6,  temps: "4h30",  station: "Station Tozeur" },
+    "Kébili":    { prix: 12.0,  temps: "2h00",  station: "Station Tozeur" },
+  },
+  "Kébili": {
+    "Sfax":      { prix: 21.0,  temps: "3h30",  station: "Station Kébili" },
+    "Gafsa":     { prix: 10.0,  temps: "1h45",  station: "Station Kébili" },
+    "Tozeur":    { prix: 12.0,  temps: "2h00",  station: "Station Kébili" },
+  },
+  "Médenine": {
+    "Gabès":     { prix: 8.0,   temps: "1h30",  station: "Station Médenine" },
+    "Djerba":    { prix: 6.5,   temps: "1h00",  station: "Station Médenine" },
+    "Tataouine": { prix: 7.0,   temps: "1h15",  station: "Station Médenine" },
+    "Sfax":      { prix: 17.0,  temps: "3h00",  station: "Station Médenine" },
+  },
+  "Kasserine": {
+    "Le Kef":    { prix: 11.5,  temps: "1h40",  station: "Station Kasserine" },
+    "Gafsa":     { prix: 7.0,   temps: "1h20",  station: "Station Kasserine" },
+    "Sousse":    { prix: 18.0,  temps: "2h45",  station: "Station Kasserine" },
+  },
+  "Zaghouan": {
+    "Tunis":     { prix: 5.35,  temps: "1h15",  station: "Station Zaghouan" },
+    "Nabeul":    { prix: 6.5,   temps: "1h20",  station: "Station Zaghouan" },
+    "Sousse":    { prix: 10.0,  temps: "2h00",  station: "Station Zaghouan" },
+  },
+  "Hammamet": {
+    "Tunis":     { prix: 6.8,   temps: "1h20",  station: "Station Hammamet" },
+    "Nabeul":    { prix: 2.0,   temps: "0h25",  station: "Station Hammamet" },
+    "Sousse":    { prix: 7.5,   temps: "1h00",  station: "Station Hammamet" },
+  },
+  "El Jem": {
+    "Sousse":    { prix: 8.6,   temps: "1h15",  station: "Station El Jem" },
+    "Sfax":      { prix: 6.0,   temps: "0h55",  station: "Station El Jem" },
+    "Mahdia":    { prix: 8.0,   temps: "1h10",  station: "Station El Jem" },
+  },
+};
+
+const tarifsVerifies = [
+  { trajet: "Tunis (Bab Saadoun) – Bizerte", prix: "6,500 DT", obs: "vérifié par Emily, fév. 2025" },
+  { trajet: "Tunis (Bab Saadoun) – Jendouba", prix: "14.500 DT", obs: "vérifié par Krayem, oct. 2025" },
+  { trajet: "Tunis (Bab Saadoun) – Tabarka", prix: "15 DT", obs: "vérifié par Spacho, sept. 2023" },
+  { trajet: "Tunis (Bab Saadoun) – Le Kef", prix: "15 DT", obs: "vérifié par Yasser, oct. 2024" },
+  { trajet: "Tunis (Bab Saadoun) – Ras Jebel", prix: "5.700 DT", obs: "vérifié par Krayem, oct. 2025" },
+  { trajet: "Tunis (Bab Alioua) – Nabeul", prix: "4.700 DT", obs: "vérifié par Kaloun, jan. 2015" },
+  { trajet: "Tunis (Bab Alioua) – Korba", prix: "6.800 DT", obs: "vérifié par Laurent, juil. 2023" },
+  { trajet: "Tunis (Bab Alioua) – Kélibia", prix: "8.800 DT", obs: "vérifié par Aziz, août 2022" },
+  { trajet: "Tunis (Bab Alioua) – Hammamet Nord", prix: "6.800 DT", obs: "vérifié par Emily, fév. 2025" },
+  { trajet: "Tunis (Bab Alioua) – Zaghouan", prix: "5.350 DT", obs: "vérifié par Mara, juil. 2025" },
+  { trajet: "Tunis (Moncef Bey) – Sousse", prix: "13.500 DT", obs: "vérifié par Mélanie, oct. 2024" },
+  { trajet: "Tunis (Moncef Bey) – Monastir", prix: "14.850 DT", obs: "vérifié par Emily, fév. 2025" },
+  { trajet: "Tunis (Moncef Bey) – Kairouan", prix: "14.600 DT", obs: "vérifié par Boyang, déc. 2025" },
+  { trajet: "Tunis (Moncef Bey) – Mahdia", prix: "17.650 DT", obs: "vérifié par Syrine, août 2024" },
+  { trajet: "Nabeul – Tunis", prix: "6.600 DT", obs: "vérifié par Jérôme, oct. 2025" },
+  { trajet: "Nabeul – Kélibia", prix: "5.350 DT", obs: "vérifié par Jérôme, oct. 2025" },
+  { trajet: "Nabeul – Sousse", prix: "8.300 DT", obs: "vérifié par Hervé, sept. 2022" },
+  { trajet: "Nabeul – Kairouan", prix: "10.600 DT", obs: "vérifié par Jérôme, oct. 2025" },
+  { trajet: "Nabeul – Monastir", prix: "10.900 DT", obs: "vérifié par Jérôme, oct. 2025" },
+  { trajet: "Sousse – Gabès", prix: "22.300 DT", obs: "vérifié par Franklin, oct. 2023" },
+  { trajet: "Sousse – Tunis", prix: "13.500 DT", obs: "vérifié par Fafa, déc. 2025" },
+  { trajet: "Sousse – Le Kef", prix: "19.000 DT", obs: "vérifié par Yasser, oct. 2024" },
+  { trajet: "Sousse – Jendouba", prix: "21 DT", obs: "vérifié par Ahmed, juil. 2025" },
+  { trajet: "Sousse – El Jem", prix: "8.600 DT", obs: "vérifié par Emilie, fév. 2025" },
+  { trajet: "Sousse – Monastir", prix: "2.400 DT", obs: "vérifié par Boyang, déc. 2025" },
+  { trajet: "Sousse – Mahdia", prix: "5.900 DT", obs: "vérifié par Claire, déc. 2024" },
+  { trajet: "Sousse – Sfax", prix: "12.400 DT", obs: "vérifié par Emilie, fév. 2025" },
+  { trajet: "Kairouan – Sousse", prix: "6.200 DT", obs: "vérifié par Boyang, déc. 2025" },
+  { trajet: "Monastir – Kairouan", prix: "7.950 DT", obs: "vérifié par Emilie, fév. 2025" },
+  { trajet: "Mahdia – El Jem", prix: "8.000 DT", obs: "vérifié par Blaise, avr. 2024" },
+  { trajet: "Sfax – Tunis", prix: "22.750 DT", obs: "vérifié par Achraf, mars 2023" },
+  { trajet: "Sfax – Kebili", prix: "21 DT", obs: "vérifié par Kaïs, jan. 2025" },
+  { trajet: "Gabès – Sousse", prix: "22.300 DT", obs: "vérifié par Emilie, fév. 2025" },
+  { trajet: "Gabès – Tozeur", prix: "17.600 DT", obs: "vérifié par Emily, fév. 2025" },
+  { trajet: "Gabès – Djerba", prix: "14.550 DT", obs: "vérifié par Emily, fév. 2025" },
+  { trajet: "Bizerte – Béja", prix: "9.250 DT", obs: "vérifié par Jean Jean, juil. 2025" },
+  { trajet: "Béja – Tabarka", prix: "6.500 DT", obs: "vérifié par Jean Jean, juil. 2025" },
+  { trajet: "Le Kef – Kasserine", prix: "11.500 DT", obs: "vérifié par Jean-Philippe, oct. 2023" },
+  { trajet: "Jendouba – Bousalem", prix: "1.800 DT", obs: "vérifié par Aron, oct. 2023" },
+];
+
+const gouvernorats = [
+  "Ariana","Béja","Ben Arous","Bizerte","Bousalem","Djerba","El Jem",
+  "Gabès","Gafsa","Hammamet","Jendouba","Kairouan","Kasserine","Kébili",
+  "Kélibia","Le Kef","Mahdia","La Manouba","Médenine","Monastir",
+  "Nabeul","Sfax","Sidi Bouzid","Siliana","Sousse","Tabarka","Tataouine",
+  "Tozeur","Tunis","Zaghouan"
+];
+
+const cityInfos = {
+  "Ariana": { summary: "Proche de Tunis, Ariana est connue pour ses jardins, son lac et sa vie de quartier dynamique.", tags: ["Urbaine","Proche Tunis","Résidentielle"] },
+  "Béja": { summary: "Ville du nord-ouest tunisien, capitale d'un riche gouvernorat agricole aux paysages vallonnés.", tags: ["Agriculture","Nature","Marché animé"] },
+  "Ben Arous": { summary: "Zone urbaine et industrielle au sud de Tunis, avec un accès facile à la capitale.", tags: ["Industrielle","Urbaine","Proche Tunis"] },
+  "Bizerte": { summary: "Grand port méditerranéen du nord tunisien, avec un vieux port charmant et de belles plages.", tags: ["Port","Plages","Histoire"] },
+  "Bousalem": { summary: "Petite ville du nord-ouest sur la Medjerda, point de passage entre Jendouba et Béja.", tags: ["Rurale","Passage"] },
+  "Djerba": { summary: "L'île de Djerba, joyau touristique du sud, est célèbre pour ses plages et son artisanat.", tags: ["Île","Tourisme","Plages"] },
+  "El Jem": { summary: "Célèbre pour son amphithéâtre romain classé UNESCO, l'un des mieux conservés au monde.", tags: ["Patrimoine UNESCO","Histoire","Culture"] },
+  "Gabès": { summary: "Ville du sud-est connue pour ses oasis côtières, ses marchés et la palmeraie qui borde la mer.", tags: ["Oasis","Côtière","Marchés"] },
+  "Gafsa": { summary: "Cœur d'une région minière, Gafsa offre une expérience authentique du sud-ouest tunisien.", tags: ["Mines","Oasis","Authentique"] },
+  "Hammamet": { summary: "Célèbre station balnéaire de la côte est, très fréquentée pour ses plages et ses hôtels.", tags: ["Balnéaire","Tourisme","Détente"] },
+  "Jendouba": { summary: "Terre verte du nord-ouest, appréciée pour ses forêts de chênes-lièges et ses montagnes.", tags: ["Nature","Forêts","Montagnes"] },
+  "Kairouan": { summary: "4ᵉ ville sainte de l'islam, Kairouan est réputée pour sa grande mosquée et son artisanat.", tags: ["Ville sainte","Histoire","Artisanat"] },
+  "Kasserine": { summary: "Porte vers les montagnes de l'Atlas tunisien, avec la chaîne de Chaambi et ses forêts.", tags: ["Montagnes","Nature","Randonnée"] },
+  "Kébili": { summary: "Centre du grand désert d'oasis du sud, idéal pour les excursions sahariennes.", tags: ["Désert","Oasis","Sahara"] },
+  "Kélibia": { summary: "Belle ville côtière de la péninsule du Cap Bon, avec un fort byzantin et des eaux cristallines.", tags: ["Fort","Plages","Cap Bon"] },
+  "Le Kef": { summary: "Ville historique du nord-ouest avec une imposante kasba et des panoramas sur la dorsale tunisienne.", tags: ["Kasba","Panorama","Histoire"] },
+  "Mahdia": { summary: "Cité côtière fondée par les Fatimides, Mahdia allie plages de sable fin et médina authentique.", tags: ["Plages","Médina","Histoire"] },
+  "La Manouba": { summary: "Gouvernorat résidentiel et universitaire au nord-ouest de Tunis.", tags: ["Universitaire","Résidentiel","Proche Tunis"] },
+  "Médenine": { summary: "Point de départ pour Djerba et le désert, Médenine conserve les célèbres ksour berbères.", tags: ["Ksour berbères","Djerba","Désert"] },
+  "Monastir": { summary: "Ville côtière historique avec son ribat, ses plages et une vie touristique animée toute l'année.", tags: ["Ribat","Plages","Tourisme"] },
+  "Nabeul": { summary: "Capitale de la poterie tunisienne, Nabeul est réputée pour son marché du vendredi et ses plages.", tags: ["Artisanat","Plages","Marché"] },
+  "Sfax": { summary: "Deuxième ville de Tunisie, grand port économique avec une médina historique très préservée.", tags: ["Économie","Port","Médina"] },
+  "Sidi Bouzid": { summary: "Ville de l'intérieur, connue pour son agriculture et berceau de la révolution de 2010.", tags: ["Agriculture","Histoire récente","Intérieur"] },
+  "Siliana": { summary: "Région de collines et de forêts du nord-ouest, idéale pour les amateurs de nature.", tags: ["Collines","Nature","Calme"] },
+  "Sousse": { summary: "Troisième ville de Tunisie, Sousse est une station balnéaire avec une médina classée UNESCO.", tags: ["UNESCO","Plages","Tourisme"] },
+  "Tabarka": { summary: "Perle du nord-ouest, Tabarka est célèbre pour son corail, ses plongées et son festival de jazz.", tags: ["Corail","Jazz","Plongée"] },
+  "Tataouine": { summary: "Décors de Star Wars réels : les ksour et paysages rocheux du Sahara en font une destination unique.", tags: ["Star Wars","Ksour","Désert"] },
+  "Tozeur": { summary: "Porte du Sahara tunisien, Tozeur éblouit avec ses palmeraies et son architecture en briques dorées.", tags: ["Palmeraies","Désert","Architecture"] },
+  "Tunis": { summary: "La capitale tunisienne réunit médina historique, quartiers modernes et un réseau de transports centralisé.", tags: ["Capitale","Médina","Transports"] },
+  "Zaghouan": { summary: "Ville des sources, Zaghouan est entourée de montagnes et abrite le célèbre temple des Eaux romain.", tags: ["Sources","Montagne","Antiquité"] },
+};
+
+const popularRoutes = [
+  { from: "Tunis", to: "Sousse" },
+  { from: "Tunis", to: "Sfax" },
+  { from: "Sousse", to: "Monastir" },
+  { from: "Tunis", to: "Bizerte" },
+  { from: "Gabès", to: "Djerba" },
+  { from: "Tunis", to: "Kairouan" },
+];
+
+// Map gov name in SVG -> display name
+const svgToDisplay = {
+  "La Manouba": "La Manouba", "Ben Arous": "Ben Arous",
+};
+
+// ══════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════
+let mode = 'destination';
+let destination = '';
+let depart = '';
+
+// ══════════════════════════════════════════════════════
+//  UTIL
+// ══════════════════════════════════════════════════════
+function normalize(s) {
+  if (!s) return '';
+  return s.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
+}
+
+// ══════════════════════════════════════════════════════
+//  UI
+// ══════════════════════════════════════════════════════
+function setMode(m) {
+  mode = m;
+  document.getElementById('btn-dest').classList.toggle('active', m === 'destination');
+  document.getElementById('btn-dep').classList.toggle('active', m === 'depart');
+  document.getElementById('sel-dest-box').classList.toggle('active-sel', m === 'destination');
+  document.getElementById('sel-dep-box').classList.toggle('active-sel', m === 'depart');
+  const steps = { destination: 'Étape 1 : choisissez la destination', depart: 'Étape 2 : choisissez le départ' };
+  document.getElementById('step-indicator').textContent = steps[m];
+}
+
+function updateSelUI() {
+  const dEl = document.getElementById('sel-dest');
+  const pEl = document.getElementById('sel-dep');
+  dEl.textContent = destination || 'Choisir…';
+  dEl.className = 'sel-value' + (destination ? '' : ' empty');
+  pEl.textContent = depart || 'Choisir…';
+  pEl.className = 'sel-value' + (depart ? '' : ' empty');
+}
+
+function swapSelections() {
+  [destination, depart] = [depart, destination];
+  updateSelUI();
+  updateMapHighlights();
+  updateCityButtons();
+}
+
+function showCityInfo(city) {
+  const info = cityInfos[city];
+  const panel = document.getElementById('city-info-content');
+  
+  // Map city names to image files
+  const cityImages = {
+    "Ariana": "Ariana.jpeg",
+    "Béja": "Beja.jpeg",
+    "Ben Arous": "Ben arous.jpg",
+    "Bizerte": "Bizerte.jpg",
+    "Bousalem": "Beja.jpeg",
+    "Djerba": "Djerba.jpeg",
+    "El Jem": "El jem.jpeg",
+    "Gabès": "Gabes.jpeg",
+    "Gafsa": "Gafsa.jpg",
+    "Hammamet": "Hammamet.jpeg",
+    "Jendouba": "Jendouba.jpeg",
+    "Kairouan": "Kairouan.jpeg",
+    "Kasserine": "Kasserine.jpeg",
+    "Kébili": "Kebili.jpg",
+    "Kélibia": "Nabeul.jpeg",
+    "Le Kef": "Kef.jpeg",
+    "Mahdia": "Mahdia.jpeg",
+    "La Manouba": "Tunis.jpeg",
+    "Médenine": "Medenine.jpeg",
+    "Monastir": "Monastir.jpeg",
+    "Nabeul": "Nabeul.jpeg",
+    "Sfax": "Sfax.jpeg",
+    "Sidi Bouzid": "Sidi bouzid.jpeg",
+    "Siliana": "Beja.jpeg",
+    "Sousse": "Sousse.jpeg",
+    "Tabarka": "Bizerte.jpg",
+    "Tataouine": "Tataouine.jpeg",
+    "Tozeur": "Tozeur.jpeg",
+    "Tunis": "Tunis.jpeg",
+    "Zaghouan": "Zaghouan.jpeg"
+  };
+  
+  const imagePath = cityImages[city] || "Tunis.jpeg";
+  
+  if (!info) { panel.innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">Pas de détails disponibles.</p>'; return; }
+  panel.innerHTML = `
+    <img src="Photos_Villes/${imagePath}" alt="${city}" class="city-info-photo">
+    <div class="city-info-body">
+      <div class="city-info-name">${city}</div>
+      <p class="city-info-desc">${info.summary}</p>
+      <div class="city-info-tags">${info.tags.map(t=>`<span class="city-tag">${t}</span>`).join('')}</div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════
+//  CITY GRID
+// ══════════════════════════════════════════════════════
+function renderCityGrid(filter) {
+  const q = normalize(filter || '');
+  const matches = gouvernorats.filter(v => normalize(v).includes(q));
+  const container = document.getElementById('city-results');
+  if (!matches.length) {
+    container.innerHTML = '<p class="no-results">Aucune ville trouvée.</p>';
+    return;
+  }
+  container.innerHTML = matches.map(ville => {
+    let extra = '';
+    if (ville === destination) extra = ' sel-dest';
+    if (ville === depart) extra += ' sel-dep';
+    const badge = ville === destination ? '<span class="city-badge">D</span>' : (ville === depart ? '<span class="city-badge">→</span>' : '');
+    
+    // Map city names to image files
+    const cityImages = {
+      "Ariana": "Ariana.jpeg",
+      "Béja": "Beja.jpeg",
+      "Ben Arous": "Ben arous.jpg",
+      "Bizerte": "Bizerte.jpg",
+      "Bousalem": "Bousalem.jpg",
+      "Djerba": "Djerba.jpeg",
+      "El Jem": "El jem.jpeg",
+      "Gabès": "Gabes.jpeg",
+      "Gafsa": "Gafsa.jpg",
+      "Hammamet": "Hammamet.jpg",
+      "Jendouba": "Jendouba.jpeg",
+      "Kairouan": "Kairouan.jpeg",
+      "Kasserine": "Kasserine.jpg",
+      "Kébili": "Kebili.jpg",
+      "Kélibia": "Nabeul.jpeg",
+      "Le Kef": "Kef.jpeg",
+      "Mahdia": "Mahdia.jpeg",
+      "La Manouba": "Tunis.jpeg",
+      "Médenine": "Medenine.jpeg",
+      "Monastir": "Monastir.jpeg",
+      "Nabeul": "Nabeul.jpeg",
+      "Sfax": "Sfax.jpeg",
+      "Sidi Bouzid": "SidiBouzid.jpg",
+      "Siliana": "Siliana.jpg",
+      "Sousse": "Sousse.jpeg",
+      "Tabarka": "Tabarka.jpg",
+      "Tataouine": "Tataouine.jpeg",
+      "Tozeur": "Tozeur.jpeg",
+      "Tunis": "Tunis.jpeg",
+      "Zaghouan": "Zaghouan.jpeg"
+    };
+    
+    const imagePath = cityImages[ville] || "Tunis.jpeg";
+    const bg = `url('Photos_Villes/${imagePath}')`;
+    return `<button class="city-btn${extra}" style="background:${bg};background-size:cover;background-position:center;" onclick="handleCityClick('${ville.replace(/'/g,"\\'")}')">
+      ${badge}<span>${ville}</span>
+    </button>`;
+  }).join('');
+}
+
+function updateCityButtons() {
+  const btns = document.querySelectorAll('.city-btn');
+  btns.forEach(btn => {
+    const name = btn.querySelector('span').textContent;
+    btn.classList.remove('sel-dest','sel-dep');
+    const badge = btn.querySelector('.city-badge');
+    if (badge) badge.remove();
+    if (name === destination) {
+      btn.classList.add('sel-dest');
+      btn.insertAdjacentHTML('afterbegin','<span class="city-badge">D</span>');
+    }
+    if (name === depart) {
+      btn.classList.add('sel-dep');
+      btn.insertAdjacentHTML('afterbegin','<span class="city-badge">→</span>');
+    }
+  });
+}
+
+// ══════════════════════════════════════════════════════
+//  CLICK HANDLER
+// ══════════════════════════════════════════════════════
+function handleCityClick(city) {
+  if (mode === 'destination') {
+    destination = city;
+    showCityInfo(city);
+    setMode('depart');
+  } else {
+    if (city === destination) { alert('Le départ et la destination ne peuvent pas être identiques !'); return; }
+    depart = city;
+    showCityInfo(city);
+    if (destination && depart) {
+      calculerTrajet(depart, destination);
+    }
+  }
+  updateSelUI();
+  updateMapHighlights();
+  updateCityButtons();
+}
+
+// ══════════════════════════════════════════════════════
+//  ALGORITHM — now with multi-hop (up to 2 transfers)
+// ══════════════════════════════════════════════════════
+function findRoute(dep, dest) {
+  // Direct
+  if (lignesLouage[dep]?.[dest]) {
+    return { type: 'direct', steps: [{ from: dep, to: dest, ...lignesLouage[dep][dest] }] };
+  }
+  // 1 transfer
+  for (const hub in (lignesLouage[dep] || {})) {
+    if (lignesLouage[hub]?.[dest]) {
+      const s1 = lignesLouage[dep][hub];
+      const s2 = lignesLouage[hub][dest];
+      return {
+        type: 'transfer1',
+        steps: [
+          { from: dep, to: hub, ...s1 },
+          { from: hub, to: dest, ...s2 }
+        ]
+      };
+    }
+  }
+  // 2 transfers — smarter search via major hubs
+  const HUBS = ['Tunis','Sousse','Sfax','Gabès','Kairouan','Nabeul'];
+  for (const h1 of HUBS) {
+    if (!lignesLouage[dep]?.[h1]) continue;
+    for (const h2 of HUBS) {
+      if (h2 === h1) continue;
+      if (!lignesLouage[h1]?.[h2]) continue;
+      if (!lignesLouage[h2]?.[dest]) continue;
+      return {
+        type: 'transfer2',
+        steps: [
+          { from: dep, to: h1, ...lignesLouage[dep][h1] },
+          { from: h1, to: h2, ...lignesLouage[h1][h2] },
+          { from: h2, to: dest, ...lignesLouage[h2][dest] }
+        ]
+      };
+    }
+  }
+  return null;
+}
+
+function parseDuration(t) {
+  const [h, m] = t.split('h').map(Number);
+  return (h || 0) * 60 + (m || 0);
+}
+function fmtDuration(mins) {
+  const h = Math.floor(mins / 60), m = mins % 60;
+  return h > 0 ? `${h}h${m > 0 ? String(m).padStart(2,'0') : '00'}` : `${m} min`;
+}
+
+function calculerTrajet(dep, dest) {
+  const passengers = parseInt(document.getElementById('passengers')?.value || 1);
+  const travelDate = document.getElementById('travel-date')?.value || '';
+  const route = findRoute(dep, dest);
+
+  const resBadge = document.getElementById('res-badge');
+  const resTitle = document.getElementById('res-title');
+  const resRoute = document.getElementById('res-route');
+  const resInfos = document.getElementById('res-infos');
+  const resNotice = document.getElementById('res-notice');
+  const resPanel = document.getElementById('result-panel');
+  const searchPanel = document.getElementById('search-panel');
+
+  if (!route) {
+    resBadge.className = 'result-badge none';
+    resBadge.innerHTML = '❌ Aucun trajet trouvé';
+    resTitle.textContent = `${dep} → ${dest}`;
+    resRoute.innerHTML = '<p style="color:var(--muted);font-size:.88rem;">Aucune liaison directe ou via hub répertoriée pour ce trajet. Essayez de passer par Tunis ou Sousse.</p>';
+    resInfos.innerHTML = '';
+    resNotice.innerHTML = '';
+    searchPanel.style.display = 'none';
+    resPanel.style.display = 'block';
+    resPanel.classList.add('anim-in');
+    return;
+  }
+
+  const totalPrix = route.steps.reduce((s, st) => s + st.prix, 0);
+  const totalMins = route.steps.reduce((s, st) => s + parseDuration(st.temps), 0);
+  const totalPrixPax = (totalPrix * passengers).toFixed(2);
+
+  // Badge & title
+  const labels = { direct: '✓ Trajet direct', transfer1: '⚡ 1 correspondance', transfer2: '🔀 2 correspondances' };
+  const classes = { direct: 'direct', transfer1: 'indirect', transfer2: 'indirect' };
+  resBadge.className = `result-badge ${classes[route.type]}`;
+  resBadge.innerHTML = labels[route.type];
+  resTitle.textContent = `${dep} → ${dest}`;
+
+  // Route steps
+  const cities = [route.steps[0].from, ...route.steps.map(s => s.to)];
+  const dotColors = ['gold', '', 'green'];
+  let routeHTML = '';
+  cities.forEach((city, i) => {
+    const isLast = i === cities.length - 1;
+    const dotColor = i === 0 ? 'gold' : (isLast ? 'green' : '');
+    routeHTML += `<div class="route-step">
+      <div class="route-step-line">
+        <div class="route-dot ${dotColor}"></div>
+        ${!isLast ? '<div class="route-connector"></div>' : ''}
+      </div>
+      <div class="route-step-info">
+        <div class="route-city">${city}</div>`;
+    if (!isLast) {
+      const s = route.steps[i];
+      routeHTML += `<div class="route-meta">📍 ${s.station} · ⏱ ${s.temps} · 💰 ${s.prix} DT/pers</div>`;
+    } else if (travelDate) {
+      routeHTML += `<div class="route-meta">📅 Arrivée estimée le ${travelDate}</div>`;
+    }
+    routeHTML += `</div></div>`;
+  });
+  resRoute.innerHTML = routeHTML;
+
+  // Info boxes
+  resInfos.innerHTML = `
+    <div class="info-box"><div class="val">${totalPrix.toFixed(2)} DT</div><div class="lbl">Prix / pers.</div></div>
+    <div class="info-box"><div class="val">${fmtDuration(totalMins)}</div><div class="lbl">Durée totale</div></div>
+    <div class="info-box"><div class="val">${totalPrixPax} DT</div><div class="lbl">Total × ${passengers}</div></div>`;
+
+  // Notice
+  const notices = {
+    direct: '🟢 Trajet direct depuis la station indiquée. Le louage part dès qu\'il est complet.',
+    transfer1: '🟡 Changement de louage au hub intermédiaire. Prévoyez 15–30 min d\'attente.',
+    transfer2: '🟠 Trajet en 2 correspondances. Départ tôt conseillé pour éviter les longues attentes.',
+  };
+  resNotice.innerHTML = notices[route.type];
+  resNotice.className = `notice ${route.type === 'direct' ? 'tip' : 'info'}`;
+
+  searchPanel.style.display = 'none';
+  resPanel.style.display = 'block';
+  resPanel.classList.add('anim-in');
+}
+
+function reinitialiser() {
+  mode = 'destination';
+  destination = '';
+  depart = '';
+  updateSelUI();
+  updateMapHighlights();
+  setMode('destination');
+  document.getElementById('search-panel').style.display = 'block';
+  document.getElementById('result-panel').style.display = 'none';
+  document.getElementById('result-panel').classList.remove('anim-in');
+  renderCityGrid('');
+}
+
+// ══════════════════════════════════════════════════════
+//  SVG MAP
+// ══════════════════════════════════════════════════════
+function initMap() {
+  const svg = document.getElementById('tunisia-map');
+  const tooltip = document.getElementById('map-tooltip');
+  const paths = svg.querySelectorAll('.gov-path');
+
+  paths.forEach(path => {
+    const govName = path.getAttribute('data-gov');
+    path.addEventListener('mouseenter', (e) => {
+      tooltip.textContent = govName;
+      tooltip.style.opacity = '1';
+    });
+    path.addEventListener('mousemove', (e) => {
+      const rect = svg.parentElement.getBoundingClientRect();
+      tooltip.style.left = (e.clientX - rect.left + 10) + 'px';
+      tooltip.style.top = (e.clientY - rect.top - 30) + 'px';
+    });
+    path.addEventListener('mouseleave', () => { tooltip.style.opacity = '0'; });
+    path.addEventListener('click', () => { handleCityClick(govName); });
+  });
+}
+
+function updateMapHighlights() {
+  const paths = document.querySelectorAll('#tunisia-map .gov-path');
+  paths.forEach(p => {
+    const g = p.getAttribute('data-gov');
+    p.classList.remove('sel-dest','sel-dep');
+    if (g === destination) p.classList.add('sel-dest');
+    if (g === depart) p.classList.add('sel-dep');
+  });
+}
+
+// ══════════════════════════════════════════════════════
+//  TARIFF TABLE
+// ══════════════════════════════════════════════════════
+function renderTarifs(filter) {
+  const q = normalize(filter || '');
+  const tbody = document.getElementById('tarif-body');
+  const rows = tarifsVerifies.filter(t => normalize(t.trajet).includes(q));
+  tbody.innerHTML = rows.map(t => `
+    <tr>
+      <td>${t.trajet}</td>
+      <td class="tarif-price">${t.prix || '—'}</td>
+      <td style="font-size:0.75rem;color:var(--muted);">${t.obs || '—'}</td>
+    </tr>`).join('');
+}
+
+// ══════════════════════════════════════════════════════
+//  POPULAR ROUTES
+// ══════════════════════════════════════════════════════
+function renderPopularRoutes() {
+  const container = document.getElementById('popular-routes');
+  container.innerHTML = popularRoutes.map(r => {
+    const info = lignesLouage[r.from]?.[r.to];
+    const prix = info ? `${info.prix} DT · ${info.temps}` : '—';
+    return `<button style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--red-light);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem;transition:all .15s;" 
+      onmouseenter="this.style.background='#fff8f8'" onmouseleave="this.style.background='var(--red-light)'"
+      onclick="quickRoute('${r.from}','${r.to}')">
+      <span style="font-weight:600;color:var(--red-dark);">${r.from} → ${r.to}</span>
+      <span style="color:var(--muted);font-size:0.78rem;">${prix}</span>
+    </button>`;
+  }).join('');
+}
+
+function quickRoute(from, to) {
+  destination = to;
+  depart = from;
+  updateSelUI();
+  updateMapHighlights();
+  updateCityButtons();
+  showCityInfo(to);
+  calculerTrajet(from, to);
+}
+
+// ══════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  // Date default
+  const dateInput = document.getElementById('travel-date');
+  if (dateInput) dateInput.value = new Date().toISOString().slice(0,10);
+
+  // City search
+  document.getElementById('city-search').addEventListener('input', e => renderCityGrid(e.target.value));
+
+  // Tarif search
+  document.getElementById('tarif-search').addEventListener('input', e => renderTarifs(e.target.value));
+
+  // Mode buttons initial state
+  setMode('destination');
+
+  // Render everything
+  renderCityGrid('');
+  renderTarifs('');
+  renderPopularRoutes();
+  initMap();
+});
+</script>
+</body>
+</html>
