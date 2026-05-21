@@ -81,11 +81,11 @@ function showCityInfo(city) {
     "Zaghouan": "./assets/images/Photos_Villes/Zaghouan.jpeg"
   };
   
-  const imagePath = cityImages[city] || "assets/images/Photos_Villes/Tunis.jpeg";
+  const imagePath = cityImages[city] || "./assets/images/Photos_Villes/Tunis.jpeg";
   
   if (!info) { panel.innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">Pas de détails disponibles.</p>'; return; }
   panel.innerHTML = `
-    <img src="assets/images/Photos_Villes/${imagePath}" alt="${city}" class="city-info-photo">
+    <img src="${imagePath}" alt="${city}" class="city-info-photo">
     <div class="city-info-body">
       <div class="city-info-name">${city}</div>
       <p class="city-info-desc">${info.summary}</p>
