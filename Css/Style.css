@@ -258,36 +258,80 @@
   .city-btn.sel-dep .city-badge { background: #27a83a; }
 
   /* ─── SVG MAP ─── */
-  .map-card { margin-bottom: 20px; }
-  .map-wrap { position: relative; }
-  #tunisia-map {
-    width: 100%; height: auto; display: block;
-    cursor: crosshair;
-  }
-  #tunisia-map .gov-path {
-    fill: #fce8e9; stroke: white; stroke-width: 1.2;
-    transition: fill 0.15s; cursor: pointer;
-  }
-  #tunisia-map .gov-path:hover { fill: #f4b3b8; }
-  #tunisia-map .gov-path.sel-dest { fill: #ffd966; stroke: #c49a1a; stroke-width: 1.5; }
-  #tunisia-map .gov-path.sel-dep { fill: #7edb83; stroke: #27a83a; stroke-width: 1.5; }
-  #tunisia-map .gov-path.sel-both-dest { fill: #ffd966; }
-  .map-legend {
-    display: flex; gap: 14px; margin-top: 10px; flex-wrap: wrap;
-    font-size: 0.78rem; color: var(--muted);
-  }
-  .map-legend-item { display: flex; align-items: center; gap: 5px; }
-  .map-legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
-  .map-tooltip {
-    position: absolute; pointer-events: none;
-    background: var(--red-dark); color: white;
-    font-size: 0.78rem; font-weight: 600; padding: 5px 10px;
-    border-radius: var(--radius-sm); white-space: nowrap;
-    opacity: 0; transition: opacity 0.12s;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-    z-index: 10;
-  }
+  /* ── MAP avec vraie photo ── */
+.map-wrap {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
 
+.map-bg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+#tunisia-map {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  cursor: crosshair;
+}
+
+#tunisia-map .gov-path {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1px;
+  transition: fill 0.15s, stroke 0.15s;
+  cursor: pointer;
+}
+
+#tunisia-map .gov-path:hover {
+  fill: rgba(200, 26, 36, 0.22);
+  stroke: rgba(200, 26, 36, 0.7);
+  stroke-width: 1.5px;
+}
+
+#tunisia-map .gov-path.sel-dep {
+  fill: rgba(126, 219, 131, 0.55);
+  stroke: #27a83a;
+  stroke-width: 2px;
+}
+
+#tunisia-map .gov-path.sel-dest {
+  fill: rgba(255, 217, 102, 0.55);
+  stroke: #c49a1a;
+  stroke-width: 2px;
+}
+
+#tunisia-map text { display: none; }
+
+.map-click-hint {
+  position: absolute;
+  bottom: 10px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.55);
+  color: white; font-size: 0.72rem;
+  padding: 4px 10px; border-radius: 999px;
+  pointer-events: none; white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+.map-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--red-dark); color: white;
+  font-size: 0.82rem; font-weight: 700;
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  white-space: nowrap; opacity: 0;
+  transition: opacity 0.12s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  z-index: 20;
+  border: 1px solid rgba(255,255,255,0.15);
+}
   /* ─── RESULT CARD ─── */
   .result-card { margin-bottom: 20px; display: none; }
   .result-header {

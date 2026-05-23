@@ -129,4 +129,5 @@ function calculerTrajet(dep, dest) {
   searchPanel.style.display = 'none';
   resPanel.style.display = 'block';
   resPanel.classList.add('anim-in');
+  afficherCarteLeaflet(route.steps);
 }

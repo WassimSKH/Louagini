@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="Css/Style.css">
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -122,6 +123,14 @@
           <circle cx="81" cy="32" r="10" fill="#d4956a"/>
           <!-- Cheveux -->
           <path d="M71 29 Q72 18 81 17 Q90 18 91 29 Q88 24 81 23 Q74 24 71 29 Z" fill="#2c1a0e"/>
+          <!-- Chapeau -->
+          <image 
+            x="66" 
+            y="8" 
+            width="30" 
+            height="20" 
+            href="assets/images/Chachia.png"
+          />
           <!-- Oreilles -->
           <circle cx="71" cy="32" r="3" fill="#c4855a"/>
           <circle cx="91" cy="32" r="3" fill="#c4855a"/>
@@ -143,8 +152,9 @@
             <line x1="81" y1="42" x2="95" y2="25" stroke="#d4956a" stroke-width="4" stroke-linecap="round"/>
             <!-- Manche du drapeau -->
             <line x1="95" y1="25" x2="95" y2="5" stroke="#8B6914" stroke-width="2"/>
-            <!-- Drapeau tunisien (SVG inline) -->
-            <image x="99" y="3" width="40" height="28" xlink:href="assets/images/Flag_of_Tunisia.svg"/>
+            <image x="99" y="3" width="40" height="28" href="assets/images/Flag_of_Tunisia.svg"/>
+          </g>  <!-- ferme armWave -->
+        </g>    <!-- ferme driverBob -->
       </svg>
     </div>
   </div>
@@ -237,10 +247,13 @@
       <div style="padding:0 22px 10px;">
         <div class="notice info" id="res-notice"></div>
       </div>
+      <div id="map-leaflet" 
+          style="display:none; height:260px; margin:0 22px 18px; border-radius:10px; overflow:hidden; border:1px solid var(--border);">
+      </div>
       <button class="reset-btn" onclick="reinitialiser()">← Nouvelle recherche</button>
     </div>
 
-    <!-- ─── MAP CARD ─── -->
+<!-- ─── MAP CARD ─── -->
     <div class="card map-card">
       <div class="card-header">
         <span class="card-title"><span class="icon">🗺️</span> Carte interactive de Tunisie</span>
@@ -248,66 +261,212 @@
       </div>
       <div class="card-body" style="padding:14px 16px;">
         <div class="map-wrap">
-          <div class="map-tooltip" id="map-tooltip"></div>
-          <svg id="tunisia-map" viewBox="0 0 340 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carte des gouvernorats de Tunisie">
+ 
+          <!-- Carte de fond (599×892px) -->
+          <img
+            src="assets/images/cartes-villes-tunisie.jpg"
+            alt="Carte de Tunisie"
+            class="map-bg-img"
+            draggable="false"
+          >
+ 
+          <!--
+            SVG overlay calé sur 599×892px.
+            Chaque path suit les frontières visibles sur la carte.
+            Nord en haut (y=0), sud en bas (y=892).
+          -->
+          <svg
+            id="tunisia-map"
+            viewBox="0 0 599 892"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Carte interactive des gouvernorats de Tunisie"
+            preserveAspectRatio="xMidYMid meet"
+          >
             <title>Carte interactive des gouvernorats de Tunisie</title>
-            <!-- Approximate paths for all 24 governorates -->
-            <path class="gov-path" data-gov="Bizerte" d="M100,10 L170,10 L190,30 L185,50 L175,60 L155,65 L130,65 L105,55 L90,40 L88,25 Z"/>
-            <path class="gov-path" data-gov="Ariana" d="M175,60 L190,55 L205,60 L210,75 L200,85 L185,88 L172,80 Z"/>
-            <path class="gov-path" data-gov="Tunis" d="M185,88 L210,80 L220,88 L218,105 L205,112 L190,108 L182,100 Z"/>
-            <path class="gov-path" data-gov="La Manouba" d="M155,65 L175,60 L172,80 L165,92 L148,90 L138,80 L140,68 Z"/>
-            <path class="gov-path" data-gov="Ben Arous" d="M190,108 L218,105 L222,122 L215,135 L200,138 L185,130 L182,118 Z"/>
-            <path class="gov-path" data-gov="Nabeul" d="M200,85 L225,80 L245,95 L255,115 L250,140 L240,160 L228,168 L215,158 L208,140 L215,125 L215,110 L205,100 Z"/>
-            <path class="gov-path" data-gov="Zaghouan" d="M182,118 L215,135 L218,155 L210,172 L195,175 L180,165 L172,148 L175,135 Z"/>
-            <path class="gov-path" data-gov="Béja" d="M90,40 L105,55 L130,65 L138,80 L130,100 L115,115 L95,118 L72,105 L65,82 L70,58 Z"/>
-            <path class="gov-path" data-gov="Jendouba" d="M70,58 L65,82 L72,105 L60,125 L42,130 L22,118 L15,95 L25,68 L48,55 Z"/>
-            <path class="gov-path" data-gov="Le Kef" d="M72,105 L95,118 L105,140 L100,165 L82,178 L60,175 L42,158 L42,130 L60,125 Z"/>
-            <path class="gov-path" data-gov="Siliana" d="M105,140 L130,135 L148,145 L155,168 L145,188 L125,195 L105,188 L90,172 L82,155 L82,178 L100,165 Z"/>
-            <path class="gov-path" data-gov="Monastir" d="M228,168 L245,162 L258,170 L262,185 L255,200 L240,205 L226,198 L220,184 Z"/>
-            <path class="gov-path" data-gov="Mahdia" d="M255,200 L270,192 L285,200 L290,222 L282,240 L265,248 L250,242 L244,225 Z"/>
-            <path class="gov-path" data-gov="Sousse" d="M215,158 L240,160 L255,175 L258,198 L240,205 L226,198 L218,185 L208,175 L210,162 Z"/>
-            <path class="gov-path" data-gov="Kairouan" d="M145,188 L175,182 L195,192 L208,215 L205,245 L190,262 L168,268 L148,260 L132,242 L130,218 L138,200 Z"/>
-            <path class="gov-path" data-gov="Kasserine" d="M82,178 L105,188 L125,195 L130,218 L125,248 L108,265 L85,268 L62,252 L52,228 L55,202 L68,188 Z"/>
-            <path class="gov-path" data-gov="Sidi Bouzid" d="M130,218 L155,210 L175,218 L190,238 L192,265 L180,285 L158,292 L138,285 L122,268 L118,248 Z"/>
-            <path class="gov-path" data-gov="Sfax" d="M240,242 L268,248 L285,262 L295,285 L292,315 L278,332 L258,338 L238,328 L222,308 L218,282 L225,262 Z"/>
-            <path class="gov-path" data-gov="Gafsa" d="M55,268 L85,268 L108,278 L118,300 L115,330 L98,348 L75,352 L52,338 L40,312 L42,285 Z"/>
-            <path class="gov-path" data-gov="Tozeur" d="M22,335 L52,338 L75,352 L78,378 L65,398 L42,408 L18,400 L8,375 L10,350 Z"/>
-            <path class="gov-path" data-gov="Kébili" d="M98,348 L125,345 L148,355 L160,378 L158,408 L142,425 L118,430 L95,420 L78,400 L78,378 L90,360 Z"/>
-            <path class="gov-path" data-gov="Gabès" d="M238,328 L265,335 L285,350 L292,378 L285,400 L265,415 L245,418 L225,405 L215,382 L218,355 Z"/>
-            <path class="gov-path" data-gov="Médenine" d="M245,418 L278,415 L305,425 L318,450 L315,480 L298,498 L272,505 L248,495 L232,472 L230,445 Z"/>
-            <path class="gov-path" data-gov="Tataouine" d="M248,495 L298,498 L325,510 L335,545 L330,590 L308,625 L272,640 L240,630 L218,605 L215,565 L225,530 Z"/>
-            <!-- City labels -->
-            <text x="130" y="40" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Bizerte</text>
-            <text x="197" y="72" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Ariana</text>
-            <text x="203" y="100" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Tunis</text>
-            <text x="157" y="80" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Manouba</text>
-            <text x="203" y="124" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Ben Arous</text>
-            <text x="232" y="130" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Nabeul</text>
-            <text x="195" y="150" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Zaghouan</text>
-            <text x="105" y="90" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Béja</text>
-            <text x="47" y="100" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Jendouba</text>
-            <text x="75" y="148" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Le Kef</text>
-            <text x="120" y="168" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Siliana</text>
-            <text x="260" y="188" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Monastir</text>
-            <text x="268" y="222" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Mahdia</text>
-            <text x="237" y="180" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Sousse</text>
-            <text x="170" y="205" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Kairouan</text>
-            <text x="90" y="232" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Kasserine</text>
-            <text x="157" y="258" text-anchor="middle" font-size="7" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Sidi Bouzid</text>
-            <text x="258" y="292" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Sfax</text>
-            <text x="82" y="315" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Gafsa</text>
-            <text x="42" y="378" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Tozeur</text>
-            <text x="125" y="392" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Kébili</text>
-            <text x="252" y="378" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Gabès</text>
-            <text x="275" y="460" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Médenine</text>
-            <text x="272" y="565" text-anchor="middle" font-size="8" fill="#8f0f1a" font-family="DM Sans,sans-serif" font-weight="600" pointer-events="none">Tataouine</text>
+ 
+            <!-- ══ NORD ══ -->
+ 
+            <!-- Bizerte — bande côtière tout au nord -->
+            <path class="gov-path" data-gov="Bizerte"
+              d="M220,58 L340,52 L390,65 L395,95 L370,115 L310,128
+                 L255,125 L215,110 L200,85 Z"/>
+ 
+            <!-- Ariana — petit gouvernorat nord-est de Tunis -->
+            <path class="gov-path" data-gov="Ariana"
+              d="M340,52 L390,65 L400,85 L395,118 L365,130
+                 L310,128 L295,110 L310,85 Z"/>
+ 
+            <!-- Tunis — capitale, centre nord-est -->
+            <path class="gov-path" data-gov="Tunis"
+              d="M365,130 L400,118 L418,135 L415,165
+                 L388,175 L362,165 L348,148 Z"/>
+ 
+            <!-- La Manouba — à l'ouest de Tunis -->
+            <path class="gov-path" data-gov="La Manouba"
+              d="M255,125 L310,128 L330,148 L320,170
+                 L290,178 L258,165 L242,145 Z"/>
+ 
+            <!-- Ben Arous — au sud-est de Tunis -->
+            <path class="gov-path" data-gov="Ben Arous"
+              d="M362,165 L415,165 L420,198 L400,218
+                 L372,220 L350,205 L345,185 Z"/>
+ 
+            <!-- Nabeul — péninsule Cap Bon, côte est -->
+            <path class="gov-path" data-gov="Nabeul"
+              d="M390,65 L450,72 L490,100 L495,148
+                 L480,200 L455,238 L425,248 L398,235
+                 L385,205 L400,175 L418,155 L415,118
+                 L400,85 Z"/>
+ 
+            <!-- Zaghouan — intérieur, sous Tunis -->
+            <path class="gov-path" data-gov="Zaghouan"
+              d="M320,170 L362,165 L388,175 L398,220
+                 L378,255 L345,262 L320,248 L305,225
+                 L308,198 Z"/>
+ 
+            <!-- ══ NORD-OUEST ══ -->
+ 
+            <!-- Béja — nord-ouest -->
+            <path class="gov-path" data-gov="Béja"
+              d="M125,95 L220,58 L255,125 L242,145
+                 L225,178 L195,195 L162,192 L128,170
+                 L112,138 Z"/>
+ 
+            <!-- Jendouba — extrême nord-ouest -->
+            <path class="gov-path" data-gov="Jendouba"
+              d="M68,68 L125,95 L128,138 L112,165
+                 L88,178 L55,165 L38,138 L42,98 Z"/>
+ 
+            <!-- Le Kef — centre-ouest nord -->
+            <path class="gov-path" data-gov="Le Kef"
+              d="M88,178 L162,192 L195,225 L188,268
+                 L162,292 L128,298 L95,278 L72,248
+                 L68,215 Z"/>
+ 
+            <!-- Siliana — centre nord -->
+            <path class="gov-path" data-gov="Siliana"
+              d="M195,195 L258,192 L288,212 L295,255
+                 L278,285 L248,295 L215,288 L188,268
+                 L195,225 Z"/>
+ 
+            <!-- ══ CENTRE-EST (CÔTE) ══ -->
+ 
+            <!-- Sousse — côte est centre -->
+            <path class="gov-path" data-gov="Sousse"
+              d="M398,268 L438,258 L462,278 L465,318
+                 L445,342 L415,348 L392,335 L382,308
+                 L385,282 Z"/>
+ 
+            <!-- Monastir — petit, côte est -->
+            <path class="gov-path" data-gov="Monastir"
+              d="M438,258 L480,252 L498,272 L500,312
+                 L480,335 L452,340 L432,325 L445,295
+                 L462,278 Z"/>
+ 
+            <!-- Mahdia — côte est sous Monastir -->
+            <path class="gov-path" data-gov="Mahdia"
+              d="M452,340 L492,338 L512,358 L515,402
+                 L495,428 L465,435 L442,418 L435,388
+                 L445,362 Z"/>
+ 
+            <!-- ══ CENTRE ══ -->
+ 
+            <!-- Kairouan — grande région centrale -->
+            <path class="gov-path" data-gov="Kairouan"
+              d="M295,255 L382,248 L412,268 L420,335
+                 L415,390 L388,418 L355,428 L318,415
+                 L292,388 L282,345 L285,298 Z"/>
+ 
+            <!-- Kasserine — centre-ouest -->
+            <path class="gov-path" data-gov="Kasserine"
+              d="M95,278 L188,268 L215,302 L222,355
+                 L205,405 L175,425 L138,428 L102,405
+                 L78,368 L75,325 Z"/>
+ 
+            <!-- Sidi Bouzid — centre -->
+            <path class="gov-path" data-gov="Sidi Bouzid"
+              d="M205,365 L285,348 L318,368 L325,428
+                 L315,478 L288,498 L252,502 L218,480
+                 L198,448 L195,405 Z"/>
+ 
+            <!-- ══ SUD-EST ══ -->
+ 
+            <!-- Sfax — grande région côte sud-est -->
+            <path class="gov-path" data-gov="Sfax"
+              d="M435,388 L510,382 L538,405 L548,468
+                 L540,528 L512,552 L478,558 L448,538
+                 L428,498 L425,448 Z"/>
+ 
+            <!-- ══ SUD-OUEST ══ -->
+ 
+            <!-- Gafsa -->
+            <path class="gov-path" data-gov="Gafsa"
+              d="M75,368 L175,358 L205,392 L212,448
+                 L195,492 L162,512 L125,515 L88,492
+                 L65,455 L62,408 Z"/>
+ 
+            <!-- Tozeur — extrême sud-ouest -->
+            <path class="gov-path" data-gov="Tozeur"
+              d="M45,465 L105,455 L138,488 L142,545
+                 L118,582 L75,590 L38,568 L25,528
+                 L28,488 Z"/>
+ 
+            <!-- Kébili — sud-centre -->
+            <path class="gov-path" data-gov="Kébili"
+              d="M195,492 L280,482 L318,508 L328,578
+                 L312,638 L272,658 L228,655 L190,628
+                 L168,578 L162,528 Z"/>
+ 
+            <!-- ══ SUD ══ -->
+ 
+            <!-- Gabès — côte sud-est -->
+            <path class="gov-path" data-gov="Gabès"
+              d="M428,498 L510,490 L548,518 L558,578
+                 L542,622 L508,642 L472,645 L442,622
+                 L425,578 L425,535 Z"/>
+ 
+            <!-- Médenine — sud-est -->
+            <path class="gov-path" data-gov="Médenine"
+              d="M442,622 L522,618 L565,642 L575,702
+                 L558,748 L522,765 L485,760 L452,735
+                 L435,692 L435,652 Z"/>
+ 
+            <!-- Tataouine — grand sud -->
+            <path class="gov-path" data-gov="Tataouine"
+              d="M435,692 L558,688 L590,720 L599,892
+                 L270,892 L272,760 L318,720 L388,708
+                 L420,718 Z"/>
+ 
           </svg>
+ 
+          <!-- Hint -->
+          <div class="map-click-hint" id="map-click-hint">👆 Cliquez sur un gouvernorat</div>
+ 
+          <!-- Tooltip -->
+          <div class="map-tooltip" id="map-tooltip"></div>
+ 
         </div>
+ 
+        <!-- Légende -->
         <div class="map-legend">
-          <div class="map-legend-item"><div class="map-legend-swatch" style="background:#ffd966;border:1px solid #c49a1a;"></div> Destination</div>
-          <div class="map-legend-item"><div class="map-legend-swatch" style="background:#7edb83;border:1px solid #27a83a;"></div> Départ</div>
-          <div class="map-legend-item"><div class="map-legend-swatch" style="background:#fce8e9;border:1px solid #f4b3b8;"></div> Non sélectionné</div>
+          <div class="map-legend-item">
+            <div class="map-legend-swatch"
+                 style="background:rgba(230,126,0,0.65);border:2px solid #e67e00;"></div>
+            Départ
+          </div>
+          <div class="map-legend-item">
+            <div class="map-legend-swatch"
+                 style="background:rgba(255,217,102,0.65);border:2px solid #c49a1a;"></div>
+            Destination
+          </div>
+          <div class="map-legend-item">
+            <div class="map-legend-swatch"
+                 style="background:rgba(200,26,36,0.22);border:1px solid rgba(200,26,36,0.7);"></div>
+            Au survol
+          </div>
         </div>
+ 
       </div>
     </div>
 
@@ -448,8 +607,8 @@
 
 <!-- JS -->
   <script src="js/data.js"></script>
-  <script src="js/map.js"></script>
   <script src="js/search.js"></script>
+  <script src="js/map.js"></script>
   <script src="js/ui.js"></script>
 </body>
 </html>
