@@ -202,7 +202,7 @@ const gouvernorats = [
   "Gabès","Gafsa","Hammamet","Jendouba","Kairouan","Kasserine","Kébili",
   "Kélibia","Le Kef","Mahdia","La Manouba","Médenine","Monastir",
   "Nabeul","Sfax","Sidi Bouzid","Siliana","Sousse","Tabarka","Tataouine",
-  "Tozeur","Tunis","Zaghouan"
+  "Tozeur","Tunis","Zaghouan", "Ras Jebal", "Korba"
 ];
 
 const cityInfos = {

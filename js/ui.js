@@ -66,7 +66,7 @@ function showCityInfo(city) {
     "Kélibia": "./assets/images/Photos_Villes/Kelibia.jpg",
     "Le Kef": "./assets/images/Photos_Villes/Kef.jpeg",
     "Mahdia": "./assets/images/Photos_Villes/Mahdia.jpeg",
-    "La Manouba": "./assets/images/Photos_Villes/Tunis.jpeg",
+    "La Manouba": "./assets/images/Photos_Villes/LaManouba.avif",
     "Médenine": "./assets/images/Photos_Villes/Medenine.jpeg",
     "Monastir": "./assets/images/Photos_Villes/Monastir.jpeg",
     "Nabeul": "./assets/images/Photos_Villes/Nabeul.jpeg",
@@ -78,7 +78,9 @@ function showCityInfo(city) {
     "Tataouine": "./assets/images/Photos_Villes/Tataouine.jpeg",
     "Tozeur": "./assets/images/Photos_Villes/Tozeur.jpeg",
     "Tunis": "./assets/images/Photos_Villes/Tunis.jpeg",
-    "Zaghouan": "./assets/images/Photos_Villes/Zaghouan.jpeg"
+    "Zaghouan": "./assets/images/Photos_Villes/Zaghouan.jpeg",
+    "Ras Jebal": "./assets/images/Photos_Villes/Ras Jebal.jpg",
+    "Korba": "./assets/images/Photos_Villes/Korba.jpeg"
   };
   
   const imagePath = cityImages[city] || "./assets/images/Photos_Villes/Tunis.jpeg";
@@ -129,7 +131,7 @@ function renderCityGrid(filter) {
     "Kélibia": "./assets/images/Photos_Villes/Kelibia.jpg",
     "Le Kef": "./assets/images/Photos_Villes/Kef.jpeg",
     "Mahdia": "./assets/images/Photos_Villes/Mahdia.jpeg",
-    "La Manouba": "./assets/images/Photos_Villes/Tunis.jpeg",
+    "La Manouba": "./assets/images/Photos_Villes/LaManouba.avif",
     "Médenine": "./assets/images/Photos_Villes/Medenine.jpeg",
     "Monastir": "./assets/images/Photos_Villes/Monastir.jpeg",
     "Nabeul": "./assets/images/Photos_Villes/Nabeul.jpeg",
@@ -141,7 +143,9 @@ function renderCityGrid(filter) {
     "Tataouine": "./assets/images/Photos_Villes/Tataouine.jpeg",
     "Tozeur": "./assets/images/Photos_Villes/Tozeur.jpeg",
     "Tunis": "./assets/images/Photos_Villes/Tunis.jpeg",
-    "Zaghouan": "./assets/images/Photos_Villes/Zaghouan.jpeg"
+    "Zaghouan": "./assets/images/Photos_Villes/Zaghouan.jpeg",
+    "Ras Jebal": "./assets/images/Photos_Villes/Ras Jebal.jpg",
+    "Korba": "./assets/images/Photos_Villes/Korba.jpeg"
     };
     
     const imagePath = cityImages[ville] || "./assets/images/Photos_Villes/Tunis.jpeg";
