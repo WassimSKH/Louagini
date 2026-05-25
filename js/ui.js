@@ -2,14 +2,16 @@
 // ══════════════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════════════
-let mode = 'depart';
-let destination = '';
-let depart = '';
+// js/ui.js — AJOUTE cette ligne en haut
+import { lignesLouage, gouvernorats, cityInfos, tarifsVerifies, popularRoutes } from './data.js';
+globalThis.mode        = 'depart';
+globalThis.destination = '';
+globalThis.depart      = '';
 
 // ══════════════════════════════════════════════════════
 //  UTIL
 // ══════════════════════════════════════════════════════
-function normalize(s) {
+export function normalize(s) {
   if (!s) return '';
   return s.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
 }
@@ -17,8 +19,8 @@ function normalize(s) {
 // ══════════════════════════════════════════════════════
 //  UI
 // ══════════════════════════════════════════════════════
-function setMode(m) {
-  mode = m;
+export function setMode(m) {
+  globalThis.mode = m;
   document.getElementById('btn-dest').classList.toggle('active', m === 'destination');
   document.getElementById('btn-dep').classList.toggle('active', m === 'depart');
   document.getElementById('sel-dest-box').classList.toggle('active-sel', m === 'destination');
@@ -27,23 +29,23 @@ function setMode(m) {
   document.getElementById('step-indicator').textContent = steps[m];
 }
 
-function updateSelUI() {
+export function updateSelUI() {
   const dEl = document.getElementById('sel-dest');
   const pEl = document.getElementById('sel-dep');
-  dEl.textContent = destination || 'Choisir…';
-  dEl.className = 'sel-value' + (destination ? '' : ' empty');
-  pEl.textContent = depart || 'Choisir…';
-  pEl.className = 'sel-value' + (depart ? '' : ' empty');
+  dEl.textContent = globalThis.destination || 'Choisir…';
+  dEl.className = 'sel-value' + (globalThis.destination ? '' : ' empty');
+  pEl.textContent = globalThis.depart || 'Choisir…';
+  pEl.className = 'sel-value' + (globalThis.depart ? '' : ' empty');
 }
 
-function swapSelections() {
-  [destination, depart] = [depart, destination];
+export function swapSelections() {
+  [globalThis.destination, globalThis.depart] = [globalThis.depart, globalThis.destination];
   updateSelUI();
   updateMapHighlights();
   updateCityButtons();
 }
 
-function showCityInfo(city) {
+export function showCityInfo(city) {
   const info = cityInfos[city];
   const panel = document.getElementById('city-info-content');
   
@@ -98,7 +100,7 @@ function showCityInfo(city) {
 // ══════════════════════════════════════════════════════
 //  CITY GRID
 // ══════════════════════════════════════════════════════
-function renderCityGrid(filter) {
+export function renderCityGrid(filter) {
   const q = normalize(filter || '');
   const matches = gouvernorats.filter(v => normalize(v).includes(q));
   const container = document.getElementById('city-results');
@@ -156,7 +158,7 @@ function renderCityGrid(filter) {
   }).join('');
 }
 
-function updateCityButtons() {
+export function updateCityButtons() {
   const btns = document.querySelectorAll('.city-btn');
   btns.forEach(btn => {
     const name = btn.querySelector('span').textContent;
@@ -177,7 +179,7 @@ function updateCityButtons() {
 // ══════════════════════════════════════════════════════
 //  CLICK HANDLER
 // ══════════════════════════════════════════════════════
-function handleCityClick(city) {
+export function handleCityClick(city) {
   if (mode === 'depart') {
     depart = city;
     showCityInfo(city);
@@ -197,7 +199,7 @@ function handleCityClick(city) {
 
 
 
-function reinitialiser() {
+export function reinitialiser() {
   mode = 'depart';
   destination = '';
   depart = '';
@@ -215,7 +217,7 @@ function reinitialiser() {
 // ══════════════════════════════════════════════════════
 //  TARIFF TABLE
 // ══════════════════════════════════════════════════════
-function renderTarifs(filter) {
+export function renderTarifs(filter) {
   const q = normalize(filter || '');
   const tbody = document.getElementById('tarif-body');
   const rows = tarifsVerifies.filter(t => normalize(t.trajet).includes(q));
@@ -230,7 +232,7 @@ function renderTarifs(filter) {
 // ══════════════════════════════════════════════════════
 //  POPULAR ROUTES
 // ══════════════════════════════════════════════════════
-function renderPopularRoutes() {
+export function renderPopularRoutes() {
   const container = document.getElementById('popular-routes');
   container.innerHTML = popularRoutes.map(r => {
     const info = lignesLouage[r.from]?.[r.to];
@@ -244,7 +246,7 @@ function renderPopularRoutes() {
   }).join('');
 }
 
-function quickRoute(from, to) {
+export function quickRoute(from, to) {
   destination = to;
   depart = from;
   updateSelUI();
@@ -257,23 +259,29 @@ function quickRoute(from, to) {
 // ══════════════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  // Date default
+function init() {
   const dateInput = document.getElementById('travel-date');
-  if (dateInput) dateInput.value = new Date().toISOString().slice(0,10);
+  if (dateInput) dateInput.value = new Date().toISOString().slice(0, 10);
 
-  // City search
-  document.getElementById('city-search').addEventListener('input', e => renderCityGrid(e.target.value));
+  const citySearch = document.getElementById('city-search');
+  if (citySearch) citySearch.addEventListener('input', e => renderCityGrid(e.target.value));
 
-  // Tarif search
-  document.getElementById('tarif-search').addEventListener('input', e => renderTarifs(e.target.value));
+  const tarifSearch = document.getElementById('tarif-search');
+  if (tarifSearch) tarifSearch.addEventListener('input', e => renderTarifs(e.target.value));
 
-  // Mode buttons initial state
   setMode('depart');
-
-  // Render everything
   renderCityGrid('');
   renderTarifs('');
   renderPopularRoutes();
-  initMap();
-});
+  if (typeof initMap === 'function') initMap();
+}
+
+// Lance init seulement si on est dans un vrai navigateur
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', init);
+}
+
+export { init };
+if (typeof module !== 'undefined') {
+  module.exports = { maFonction };
+}

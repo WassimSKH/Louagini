@@ -1,7 +1,7 @@
 // ══════════════════════════════════════════════════════
 //  SVG MAP
 // ══════════════════════════════════════════════════════
-function initMap() {
+export function initMap() {
   const svg     = document.getElementById('tunisia-map');
   const tooltip = document.getElementById('map-tooltip');
   const hint    = document.getElementById('map-click-hint');
@@ -31,7 +31,7 @@ function initMap() {
   });
 }
 
-function updateMapHighlights() {
+export function updateMapHighlights() {
   const paths = document.querySelectorAll('#tunisia-map .gov-path');
   paths.forEach(p => {
     const g = p.getAttribute('data-gov');
@@ -41,7 +41,7 @@ function updateMapHighlights() {
   });
 }
 
-const stationCoords = {
+export const stationCoords = {
   "Moncef Bey":        [36.8065, 10.1815],
   "Bab Saadoun":       [36.8198, 10.1654],
   "Bab Alioua":        [36.7967, 10.1856],
@@ -66,9 +66,9 @@ const stationCoords = {
   "Station Béja":      [36.7333,  9.1833],
 };
 
-let leafletMap = null;
+export let leafletMap = null;
 
-function afficherCarteLeaflet(steps) {
+export function afficherCarteLeaflet(steps) {
   const panel = document.getElementById('map-leaflet');
   panel.style.display = 'block';
 
@@ -102,4 +102,7 @@ function afficherCarteLeaflet(steps) {
 
   // Centrer la carte sur tous les points
   leafletMap.fitBounds(points, { padding: [30, 30] });
+}
+if (typeof module !== 'undefined') {
+  module.exports = { maFonction };
 }

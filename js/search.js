@@ -1,7 +1,16 @@
 // ══════════════════════════════════════════════════════
 //  ALGORITHM — now with multi-hop (up to 2 transfers)
 // ══════════════════════════════════════════════════════
-function findRoute(dep, dest) {
+// Tests/search.test.js
+import { describe, it, expect } from 'vitest'
+import { findRoute, parseDuration, fmtDuration } from '../js/search.js'
+import { lignesLouage } from '../js/data.js' // besoin d'importer les données pour que findRoute puisse les lire
+
+export function findRoute(dep, dest) {
+  // empêcher un trajet vers la même ville
+  if (dep === dest) {
+    return null;
+  }
   // Direct
   if (lignesLouage[dep]?.[dest]) {
     return { type: 'direct', steps: [{ from: dep, to: dest, ...lignesLouage[dep][dest] }] };
@@ -41,16 +50,16 @@ function findRoute(dep, dest) {
   return null;
 }
 
-function parseDuration(t) {
+export function parseDuration(t) {
   const [h, m] = t.split('h').map(Number);
   return (h || 0) * 60 + (m || 0);
 }
-function fmtDuration(mins) {
+export function fmtDuration(mins) {
   const h = Math.floor(mins / 60), m = mins % 60;
   return h > 0 ? `${h}h${m > 0 ? String(m).padStart(2,'0') : '00'}` : `${m} min`;
 }
 
-function calculerTrajet(dep, dest) {
+export function calculerTrajet(dep, dest) {
   const passengers = parseInt(document.getElementById('passengers')?.value || 1);
   const travelDate = document.getElementById('travel-date')?.value || '';
   const route = findRoute(dep, dest);
@@ -130,4 +139,7 @@ function calculerTrajet(dep, dest) {
   resPanel.style.display = 'block';
   resPanel.classList.add('anim-in');
   afficherCarteLeaflet(route.steps);
+}
+if (typeof module !== 'undefined') {
+  module.exports = { maFonction };
 }
