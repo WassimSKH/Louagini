@@ -136,6 +136,4 @@ function findRoute(dep, dest) {
   resPanel.classList.add('anim-in');
   afficherCarteLeaflet(route.steps);
 }
-if (typeof module !== 'undefined') {
-  module.exports = { maFonction };
-}
+

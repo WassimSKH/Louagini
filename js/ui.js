@@ -69,42 +69,7 @@ function showCityInfo(city) {
   const info  = cityInfos[city];
   const panel = document.getElementById('city-info-content');
 
-  const cityImages = {
-    "Ariana":      "./assets/images/Photos_Villes/Ariana.jpeg",
-    "Béja":        "./assets/images/Photos_Villes/Beja.jpeg",
-    "Ben Arous":   "./assets/images/Photos_Villes/Ben arous.jpg",
-    "Bizerte":     "./assets/images/Photos_Villes/Bizerte.jpg",
-    "Bousalem":    "./assets/images/Photos_Villes/Bousalem.jpg",
-    "Djerba":      "./assets/images/Photos_Villes/Djerba.jpeg",
-    "El Jem":      "./assets/images/Photos_Villes/El jem.jpeg",
-    "Gabès":       "./assets/images/Photos_Villes/Gabes.jpeg",
-    "Gafsa":       "./assets/images/Photos_Villes/Gafsa.jpg",
-    "Hammamet":    "./assets/images/Photos_Villes/Hammamet.jpg",
-    "Jendouba":    "./assets/images/Photos_Villes/Jendouba.jpeg",
-    "Kairouan":    "./assets/images/Photos_Villes/Kairouan.jpeg",
-    "Kasserine":   "./assets/images/Photos_Villes/Kasserine.jpg",
-    "Kébili":      "./assets/images/Photos_Villes/Kebili.jpg",
-    "Kélibia":     "./assets/images/Photos_Villes/Kelibia.jpg",
-    "Le Kef":      "./assets/images/Photos_Villes/Kef.jpeg",
-    "Mahdia":      "./assets/images/Photos_Villes/Mahdia.jpeg",
-    "La Manouba":  "./assets/images/Photos_Villes/LaManouba.avif",
-    "Médenine":    "./assets/images/Photos_Villes/Medenine.jpeg",
-    "Monastir":    "./assets/images/Photos_Villes/Monastir.jpeg",
-    "Nabeul":      "./assets/images/Photos_Villes/Nabeul.jpeg",
-    "Sfax":        "./assets/images/Photos_Villes/Sfax.jpeg",
-    "Sidi Bouzid": "./assets/images/Photos_Villes/SidiBouzid.jpg",
-    "Siliana":     "./assets/images/Photos_Villes/Siliana.jpg",
-    "Sousse":      "./assets/images/Photos_Villes/Sousse.jpeg",
-    "Tabarka":     "./assets/images/Photos_Villes/Tabarka.jpg",
-    "Tataouine":   "./assets/images/Photos_Villes/Tataouine.jpeg",
-    "Tozeur":      "./assets/images/Photos_Villes/Tozeur.jpeg",
-    "Tunis":       "./assets/images/Photos_Villes/Tunis.jpeg",
-    "Zaghouan":    "./assets/images/Photos_Villes/Zaghouan.jpeg",
-    "Ras Jebal":   "./assets/images/Photos_Villes/Ras Jebal.jpg",
-    "Korba":       "./assets/images/Photos_Villes/Korba.jpeg"
-  };
-
-  const imagePath = cityImages[city] || "./assets/images/Photos_Villes/Tunis.jpeg";
+  const imagePath = cityImagePaths[city] || "./assets/images/Photos_Villes/Tunis.jpeg";
 
   if (!info) {
     panel.innerHTML = '<p style="text-align:center;color:var(--muted);padding:20px;">Pas de détails disponibles.</p>';
@@ -136,41 +101,6 @@ function renderCityGrid(filter) {
     return;
   }
 
-  const cityImages = {
-    "Ariana":      "./assets/images/Photos_Villes/Ariana.jpeg",
-    "Béja":        "./assets/images/Photos_Villes/Beja.jpeg",
-    "Ben Arous":   "./assets/images/Photos_Villes/Ben arous.jpg",
-    "Bizerte":     "./assets/images/Photos_Villes/Bizerte.jpg",
-    "Bousalem":    "./assets/images/Photos_Villes/Bousalem.jpg",
-    "Djerba":      "./assets/images/Photos_Villes/Djerba.jpeg",
-    "El Jem":      "./assets/images/Photos_Villes/El jem.jpeg",
-    "Gabès":       "./assets/images/Photos_Villes/Gabes.jpeg",
-    "Gafsa":       "./assets/images/Photos_Villes/Gafsa.jpg",
-    "Hammamet":    "./assets/images/Photos_Villes/Hammamet.jpg",
-    "Jendouba":    "./assets/images/Photos_Villes/Jendouba.jpeg",
-    "Kairouan":    "./assets/images/Photos_Villes/Kairouan.jpeg",
-    "Kasserine":   "./assets/images/Photos_Villes/Kasserine.jpg",
-    "Kébili":      "./assets/images/Photos_Villes/Kebili.jpg",
-    "Kélibia":     "./assets/images/Photos_Villes/Kelibia.jpg",
-    "Le Kef":      "./assets/images/Photos_Villes/Kef.jpeg",
-    "Mahdia":      "./assets/images/Photos_Villes/Mahdia.jpeg",
-    "La Manouba":  "./assets/images/Photos_Villes/LaManouba.avif",
-    "Médenine":    "./assets/images/Photos_Villes/Medenine.jpeg",
-    "Monastir":    "./assets/images/Photos_Villes/Monastir.jpeg",
-    "Nabeul":      "./assets/images/Photos_Villes/Nabeul.jpeg",
-    "Sfax":        "./assets/images/Photos_Villes/Sfax.jpeg",
-    "Sidi Bouzid": "./assets/images/Photos_Villes/SidiBouzid.jpg",
-    "Siliana":     "./assets/images/Photos_Villes/Siliana.jpg",
-    "Sousse":      "./assets/images/Photos_Villes/Sousse.jpeg",
-    "Tabarka":     "./assets/images/Photos_Villes/Tabarka.jpg",
-    "Tataouine":   "./assets/images/Photos_Villes/Tataouine.jpeg",
-    "Tozeur":      "./assets/images/Photos_Villes/Tozeur.jpeg",
-    "Tunis":       "./assets/images/Photos_Villes/Tunis.jpeg",
-    "Zaghouan":    "./assets/images/Photos_Villes/Zaghouan.jpeg",
-    "Ras Jebal":   "./assets/images/Photos_Villes/Ras Jebal.jpg",
-    "Korba":       "./assets/images/Photos_Villes/Korba.jpeg"
-  };
-
   container.innerHTML = matches.map(ville => {
     let extra = '';
     if (ville === destination) extra  = ' sel-dest';
@@ -180,7 +110,7 @@ function renderCityGrid(filter) {
       ? '<span class="city-badge">D</span>'
       : (ville === depart ? '<span class="city-badge">→</span>' : '');
 
-    const imagePath = cityImages[ville] || "./assets/images/Photos_Villes/Tunis.jpeg";
+    const imagePath = cityImagePaths[ville] || "./assets/images/Photos_Villes/Tunis.jpeg";
 
     return `<button
       class="city-btn${extra}"

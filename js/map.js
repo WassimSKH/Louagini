@@ -103,6 +103,11 @@ function afficherCarteLeaflet(steps) {
   // Centrer la carte sur tous les points
   leafletMap.fitBounds(points, { padding: [30, 30] });
 }
-if (typeof module !== 'undefined') {
-  module.exports = { maFonction };
+function cacherCarteLeaflet() {
+  const panel = document.getElementById('map-leaflet');
+  if (leafletMap) {
+    leafletMap.remove();
+    leafletMap = null;
+  }
+  if (panel) panel.style.display = 'none';
 }
