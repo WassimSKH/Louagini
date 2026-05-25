@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { setMode, updateSelUI, swapSelections, normalize, reinitialiser } from '../js/ui.js'
+import { setMode, updateSelUI, swapSelections, normalize, reinitialiser } from '../js-test/ui.js'
 
 // ── Mock des fonctions externes à ui.js ──────────────────
 // Ces fonctions viennent de map.js et sont appelées par ui.js

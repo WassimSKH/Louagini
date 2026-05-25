@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { stationCoords } from '../js/map.js'
+import { stationCoords } from '../js-test/map.js'
 
 describe('stationCoords — coordonnées GPS', () => {
   it('toutes les stations ont des coordonnées valides', () => {

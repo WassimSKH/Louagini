@@ -2,7 +2,7 @@
 //  DATA
 // ══════════════════════════════════════════════════════
 
-const lignesLouage = {
+export const lignesLouage = {
   "Tunis": {
     "Sousse":    { prix: 13.5,  temps: "2h00",  station: "Moncef Bey" },
     "Monastir":  { prix: 14.85, temps: "2h30",  station: "Moncef Bey" },
@@ -155,7 +155,7 @@ const lignesLouage = {
   },
 };
 
-const tarifsVerifies = [
+export const tarifsVerifies = [
   { trajet: "Tunis (Bab Saadoun) – Bizerte", prix: "6,500 DT", obs: "vérifié par Emily, fév. 2025" },
   { trajet: "Tunis (Bab Saadoun) – Jendouba", prix: "14.500 DT", obs: "vérifié par Krayem, oct. 2025" },
   { trajet: "Tunis (Bab Saadoun) – Tabarka", prix: "15 DT", obs: "vérifié par Spacho, sept. 2023" },
@@ -197,7 +197,7 @@ const tarifsVerifies = [
   { trajet: "Jendouba – Bousalem", prix: "1.800 DT", obs: "vérifié par Aron, oct. 2023" },
 ];
 
-const gouvernorats = [
+export const gouvernorats = [
   "Ariana","Béja","Ben Arous","Bizerte","Bousalem","Djerba","El Jem",
   "Gabès","Gafsa","Hammamet","Jendouba","Kairouan","Kasserine","Kébili",
   "Kélibia","Le Kef","Mahdia","La Manouba","Médenine","Monastir",
@@ -205,7 +205,7 @@ const gouvernorats = [
   "Tozeur","Tunis","Zaghouan", "Ras Jebal", "Korba"
 ];
 
-const cityInfos = {
+export const cityInfos = {
   "Ariana": { summary: "Proche de Tunis, Ariana est connue pour ses jardins, son lac et sa vie de quartier dynamique.", tags: ["Urbaine","Proche Tunis","Résidentielle"] },
   "Béja": { summary: "Ville du nord-ouest tunisien, capitale d'un riche gouvernorat agricole aux paysages vallonnés.", tags: ["Agriculture","Nature","Marché animé"] },
   "Ben Arous": { summary: "Zone urbaine et industrielle au sud de Tunis, avec un accès facile à la capitale.", tags: ["Industrielle","Urbaine","Proche Tunis"] },
@@ -238,7 +238,7 @@ const cityInfos = {
   "Zaghouan": { summary: "Ville des sources, Zaghouan est entourée de montagnes et abrite le célèbre temple des Eaux romain.", tags: ["Sources","Montagne","Antiquité"] },
 };
 
-const popularRoutes = [
+export const popularRoutes = [
   { from: "Tunis", to: "Sousse" },
   { from: "Tunis", to: "Sfax" },
   { from: "Sousse", to: "Monastir" },
@@ -248,9 +248,8 @@ const popularRoutes = [
 ];
 
 // Map gov name in SVG -> display name
-const svgToDisplay = {
+export const svgToDisplay = {
   "La Manouba": "La Manouba", "Ben Arous": "Ben Arous",
 };
 if (typeof module !== 'undefined') {
-  module.exports = { maFonction };
 }

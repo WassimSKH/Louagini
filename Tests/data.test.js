@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { lignesLouage, gouvernorats, cityInfos, tarifsVerifies } from '../js/data.js'
+import { lignesLouage, gouvernorats, cityInfos, tarifsVerifies } from '../js-test/data.js'
 
 describe('lignesLouage — cohérence des données', () => {
   it('chaque ville de départ a au moins une destination', () => {

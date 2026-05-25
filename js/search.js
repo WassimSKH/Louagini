@@ -1,12 +1,8 @@
 // ══════════════════════════════════════════════════════
 //  ALGORITHM — now with multi-hop (up to 2 transfers)
 // ══════════════════════════════════════════════════════
-// Tests/search.test.js
-import { describe, it, expect } from 'vitest'
-import { findRoute, parseDuration, fmtDuration } from '../js/search.js'
-import { lignesLouage } from '../js/data.js' // besoin d'importer les données pour que findRoute puisse les lire
 
-export function findRoute(dep, dest) {
+function findRoute(dep, dest) {
   // empêcher un trajet vers la même ville
   if (dep === dest) {
     return null;
@@ -50,16 +46,16 @@ export function findRoute(dep, dest) {
   return null;
 }
 
-export function parseDuration(t) {
+ function parseDuration(t) {
   const [h, m] = t.split('h').map(Number);
   return (h || 0) * 60 + (m || 0);
 }
-export function fmtDuration(mins) {
+ function fmtDuration(mins) {
   const h = Math.floor(mins / 60), m = mins % 60;
   return h > 0 ? `${h}h${m > 0 ? String(m).padStart(2,'0') : '00'}` : `${m} min`;
 }
 
-export function calculerTrajet(dep, dest) {
+ function calculerTrajet(dep, dest) {
   const passengers = parseInt(document.getElementById('passengers')?.value || 1);
   const travelDate = document.getElementById('travel-date')?.value || '';
   const route = findRoute(dep, dest);

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { findRoute, parseDuration, fmtDuration } from '../js/search.js'
+import { findRoute, parseDuration, fmtDuration } from '../js-test/search.js'
 
 describe('findRoute — trajets directs', () => {
   it('trouve un trajet direct Tunis → Sousse', () => {
