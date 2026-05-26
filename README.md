@@ -62,7 +62,3 @@ npm test
 ## 💡 Astuce
 
 Le site fonctionne également en ouvrant directement `index.html` si vous préférez ne pas lancer de serveur.
-
----
-
-Si tu veux, je peux aussi ajouter un vrai système de recherches et de filtres plus avancé ou transformer le code en ES modules modernes.
