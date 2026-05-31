@@ -13,7 +13,6 @@ Il permet de sélectionner un départ et une destination, de voir les correspond
 
 ## 🚀 Installation
 
-Ouvre un terminal dans le dossier du projet :
 
 ```bash
 cd C:\Users\LENOV\Louagini
@@ -28,7 +27,7 @@ Pour lancer un serveur local et ouvrir le site :
 npm start
 ```
 
-Puis ouvre :
+Puis :
 
 ```text
 http://localhost:8080
@@ -36,7 +35,7 @@ http://localhost:8080
 
 ## 🧪 Tests
 
-La suite de tests utilise Vitest :
+La suite de tests avec Vitest :
 
 ```bash
 npm test
