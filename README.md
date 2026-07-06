@@ -50,14 +50,4 @@ npm test
 - `Tests/` — tests unitaires
 - `js-test/` — code de test côté Node
 
-## 🛠️ Améliorations apportées
 
-- Ajout d'un script `npm start` avec serveur local
-- Nettoyage de fichiers JS pour supprimer des exports CommonJS invalides
-- Ajout d'un helper `cacherCarteLeaflet()` pour fermer proprement la carte au reset
-- Ajout d'une documentation `README.md`
-- Ajout d'un fichier `.gitignore`
-
-## 💡 Astuce
-
-Le site fonctionne également en ouvrant directement `index.html` si vous préférez ne pas lancer de serveur.
